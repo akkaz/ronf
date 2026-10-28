@@ -35,7 +35,7 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,te
 .stage .zone-pill{font-size:max(.8rem,12px)}
 body[data-zone=ok] .zone-pill{background:#246c43;color:#fff}
 .patience[data-state=idle]{--pat:#5b6b61}
-.warning-steps,.warning-recovery{font-size:max(.8rem,12px)}
+.stage .warning-steps,.stage .recovery-label{font-size:max(.8rem,12px)}
 .stage .combo-help{color:#654099;background:#fff}
 .sky-dawn::after,.sky-day::after{box-shadow:none}
 @media(max-width:850px){.app-name{display:none}.top .actions{gap:.35rem}.top-classes{margin-right:auto}.brand-home{font-size:1.6rem}.class-picker{max-width:10rem}}
