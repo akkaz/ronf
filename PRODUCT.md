@@ -31,7 +31,7 @@ Giocosa, alpina, leggibile. Nome scelto dal docente: Ronf. Indirizzo ronf.akkaz.
 
 ## Operating Context
 
-Una landing pubblica presenta il progetto, la gratuità e il codice GitHub. Un grande pulsante «Accendi Ronf» apre il tabellone in `gioca.html`. Il docente usa un computer con microfono collegato alla LIM; sul telefono può esplorare e configurare il gioco.
+La landing deve essere molto minimale: nome, piccola mascotte, una breve descrizione, indicazione open source con link GitHub e un unico grande pulsante «Accendi Ronf» verso `gioca.html`. Gratuità e assenza di account in una sola riga. Il docente usa un computer con microfono collegato alla LIM; sul telefono può esplorare e configurare il gioco.
 
 ## Positioning
 

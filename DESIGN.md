@@ -36,10 +36,10 @@ colors:
 typography:
   display:
     fontFamily: "Bungee, Atkinson, sans-serif"
-    fontSize: "clamp(2.5rem, 4.8vw, 4.8rem)"
+    fontSize: "clamp(4rem, 14vw, 6rem)"
     fontWeight: 400
-    lineHeight: 1.14
-    letterSpacing: "-0.03em"
+    lineHeight: 1.1
+    letterSpacing: "-0.025em"
   headline:
     fontFamily: "Bungee, Atkinson, sans-serif"
     fontSize: "clamp(1.7rem, 2.8vw, 2.5rem)"
@@ -188,9 +188,9 @@ La palette accosta bosco e carta a un cielo blu; i colori di segnale e di progre
 Il titolo è compatto, vistoso e giocoso; i testi mantengono forme aperte e un'interlinea generosa. I font sono distribuiti dal sito, senza richieste a servizi di font esterni.
 
 ### Hierarchy
-- **Display** (`display`): titolo principale della presentazione; larghezza limitata a (13ch) per una lettura in poche righe. Le variazioni mobile sono nella sezione Layout.
-- **Headline** (`headline`): sezioni della presentazione. Il titolo di avvio del gioco ha il ruolo separato `welcome-title`.
-- **Body** (`body-landing`, `body-board`): testo descrittivo e interfaccia; la descrizione principale della presentazione arriva a (43ch), i testi lunghi del gioco a circa (68ch).
+- **Display** (`display`): marchio Ronf al centro, con il piccolo `zz`; scala fluida da (4rem) a (6rem).
+- **Headline** (`headline`): disponibile per eventuali titoli; la landing minimale non ha sezioni secondarie. Il titolo di avvio del gioco ha il ruolo separato `welcome-title`.
+- **Body** (`body-landing`, `body-board`): una descrizione breve nella landing, larga al massimo (34ch), con testo a (1.15rem). I testi lunghi del gioco arrivano a circa (68ch).
 - **Label** (`label-board`): etichette di misure e punteggi sul tabellone. Le etichette secondarie possono essere più piccole, ma non sostituiscono quelle principali.
 - **Readout** (`readout`): livello sonoro nel pannello. I grandi numeri della combo e del punteggio hanno scala propria e numeri tabulari.
 
@@ -198,7 +198,7 @@ Il titolo è compatto, vistoso e giocoso; i testi mantengono forme aperte e un'i
 
 ## Layout
 
-La presentazione usa un contenitore massimo di (1440px) e margini laterali fluidi (`clamp(1.2rem, 5vw, 5rem)`). L'apertura ha due colonne in rapporto (1.36:1), con titolo e azione a sinistra e scena a destra. A (1000px) si compatta; a (700px) diventa una colonna. Il titolo mobile usa `clamp(2.2rem, 7.8vw, 3.5rem)` e l'azione occupa la larghezza disponibile. Oltre (1600px) il titolo arriva a (5rem).
+La presentazione è una singola colonna centrata nel viewport, larga al massimo (28rem), con margini di (1.5rem). Piccola mascotte (112px), marchio Ronf, descrizione breve, una sola CTA, gratuità e link GitHub. Nessuna testata o sezione successiva. Nei viewport sotto (600px) di altezza la mascotte scende a (80px) e gli spazi si compattano; il contenuto può comunque scorrere.
 
 Il tabellone usa un rem che cresce con lo schermo (`clamp(14px, calc(.62vw + .55vh), 26px)`) e `board-gap` fra le regioni. La scena contiene mascotte al centro, livello/XP in alto a sinistra, misure a destra, punteggio e combo in basso. Storico ed energia della lezione occupano la regione inferiore. Con larghezza oltre (1100px) e altezza da (700px), l'app usa l'altezza del viewport; sotto (1100px) scorre verticalmente.
 
@@ -206,10 +206,10 @@ Sul telefono, entro (620px), il gioco mantiene una scena alta e dispone le due m
 
 ## Elevation & Depth
 
-Il tabellone usa soprattutto campi di colore, bordi e livelli della scena. La scena corrente non ha ombra. Le ombre funzionali emergono su dialoghi, avvio e promemoria; l'azione della presentazione ha un'ombra morbida contenuta. Non applicare alle nuove superfici le vecchie ombre del palco superate dalla cascata attuale.
+Il tabellone usa soprattutto campi di colore, bordi e livelli della scena. La scena corrente non ha ombra. Le ombre funzionali emergono su dialoghi, avvio e promemoria. La landing usa solo il fondo carta e il pulsante pieno, senza ombre.
 
 ### Shadow Vocabulary
-- **Azione della presentazione:** `0 5px 14px rgba(20,38,30,.12)`; accompagna l'azione grande.
+- **Azione della presentazione:** verde bosco pieno, senza ombra.
 - **Avvio:** `0 12px 46px rgba(10,27,24,.26)`; stacca la carta dal fondale scuro.
 - **Dialogo:** `8px 8px 0 var(--forest)`; ombra netta già usata nelle impostazioni.
 - **Cambio ora:** `0 8px 32px rgba(10,27,24,.25)`; eleva il promemoria.
@@ -219,7 +219,7 @@ Il tabellone usa soprattutto campi di colore, bordi e livelli della scena. La sc
 
 Le carte principali hanno angoli morbidi, con pannelli e avvio a `panel` e misure a `hud`. I controlli usano `control`; i selettori compatti usano `field-compact`. Chip di classe, pill di stato e barre di progressione hanno estremità rotonde.
 
-La scena della presentazione è una nicchia con sommità arcuata (`48% 48% 14px 14px`), più larga su mobile (`45% 45% 14px 14px`). Il tabellone mantiene invece un rettangolo arrotondato delimitato da un bordo bosco di (2px). Medaglie circolari e stemma a scudo identificano premi e livello.
+La landing mostra solo la piccola mascotte senza un contenitore illustrato. Il tabellone mantiene un rettangolo arrotondato delimitato da un bordo bosco di (2px). Medaglie circolari e stemma a scudo identificano premi e livello.
 
 ## Components
 
@@ -227,7 +227,7 @@ La scena della presentazione è una nicchia con sommità arcuata (`48% 48% 14px 
 
 Comandi grandi e inequivocabili, con etichetta in grassetto.
 
-- **Presentazione:** `button-landing`, altezza minima (90px), testo fluido (`clamp(1.45rem, 2.2vw, 1.9rem)`), icona e freccia. Hover con sollevamento di (2px) e transizione di (.18s); mobile almeno (82px).
+- **Presentazione:** `button-landing`, altezza minima (80px), testo (1.6rem), icona play. Hover con cambio di fondo e transizione di (.18s), senza spostamenti.
 - **Gioco:** `button-primary` e `button-secondary`, bordo bosco di (1.5px), testo (.9rem). Hover con cambio di fondo; pressione con spostamento di (1px). L'avvio usa controlli più alti e il verde `forest-start` per il microfono.
 - **Azioni distruttive:** bordo rosso e testo rosso scuro; la variante armata diventa rossa con testo bianco. Non usarla per le azioni quotidiane.
 - **Focus:** contorno visibile di (3px); offset di (6px) sui link della presentazione e (3px) sui controlli del gioco.
@@ -247,13 +247,13 @@ Campo bianco, bordo verde grigio di (1.5px), angoli `control`, etichetta in gras
 
 ### Navigation
 
-La presentazione ha marchio Bungee a sinistra e link testuali a destra, con icona GitHub e nome visibile. Su mobile il link informativo viene nascosto, mentre GitHub rimane. Il marchio `Ronf` conserva il piccolo `zz` inclinato. La testata del gioco usa il marchio come ritorno all'avvio e mantiene i comandi operativi raggruppati.
+La presentazione concentra il marchio Bungee al centro e offre due link: «Accendi Ronf» e «Open source su GitHub», con icona GitHub e nome visibile. Il marchio conserva il piccolo `zz` inclinato. La testata del gioco mantiene i comandi operativi raggruppati.
 
 ### Habitat and board
 
-La mascotte deve restare protagonista della scena. Notte, alba, giorno e allarme descrivono i suoi stati. La didascalia della scena della presentazione ha fondo notturno pieno e spazio interno: non appoggiare il testo sulle montagne. Sul tabellone energia della lezione e XP restano visivamente distinti, con una combo circolare e grandi letture numeriche.
+La mascotte è un piccolo segno riconoscibile nella landing e resta protagonista della scena del tabellone. Notte, alba, giorno e allarme descrivono i suoi stati. Sul tabellone energia della lezione e XP restano visivamente distinti, con una combo circolare e grandi letture numeriche.
 
-Le animazioni del gioco descrivono respiro, cambi di stato e traguardi. `prefers-reduced-motion` elimina animazioni e transizioni, compresi movimento dell'azione e scorrimento morbido della presentazione; i coriandoli non vengono mostrati.
+Le animazioni del gioco descrivono respiro, cambi di stato e traguardi. `prefers-reduced-motion` elimina animazioni e transizioni; nella landing disattiva la transizione del pulsante e l’inclinazione del piccolo `zz`.
 
 ## Do's and Don'ts
 
