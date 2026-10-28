@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 
 test('la distribuzione non dipende da servizi scolastici o caricamenti esterni',async()=>{
-  const names=['index.html','gioca.html','app.js','game-data.js','lesson-clock.js','backup.js','board.css','lesson-board.css','ronf.css'];
+  const names=['index.html','gioca.html','app.js','game-data.js','lesson-clock.js','backup.js','setup-flow.js','entry.js','board.css','lesson-board.css','ronf.css'];
   for(const name of names){
     const source=await readFile(new URL('../'+name,import.meta.url),'utf8');
     assert.doesNotMatch(source,/fadzanardelli|GOOGLE_CLIENT_ID|MONGODB_URI|fetch\(|XMLHttpRequest|sendBeacon|MediaRecorder|fonts\.googleapis|__VIEWER__|__CLASS__/i,name);

@@ -1,6 +1,7 @@
 import * as RonfGame from './game-data.js';
 import * as RonfClock from './lesson-clock.js';
 import { createBackup, parseBackup, backupValues } from './backup.js';
+import { createSetupFlow, silenceThresholds } from './setup-flow.js';
 
 (() => {
   'use strict';
@@ -106,6 +107,8 @@ import { createBackup, parseBackup, backupValues } from './backup.js';
   }
 
   let mode = 'idle'; // idle | mic | demo
+  let setupActive = false, welcome = null, micRequest = 0;
+  let cancelMeasurement = () => {};
   const settings = loadSettings();
   let league = loadLeague();
   let current = readJSON(KEYS.current);
@@ -129,7 +132,7 @@ import { createBackup, parseBackup, backupValues } from './backup.js';
     phraseMood = ''; phraseAt = 0;
   }
   const saveSettings = () => { rememberProfile(); writeJSON(KEYS.settings, settings); };
-  const saveLeague = () => { if (mode === 'mic') { writeJSON(KEYS.league, league); saveLesson(); } };
+  const saveLeague = () => { if (mode === 'mic' && !setupActive) { writeJSON(KEYS.league, league); saveLesson(); } };
   // la lezione in corso sopravvive a una ricarica della pagina (stessa classe, entro 20 minuti)
   function lessonArchive() {
     const old = readJSON(KEYS.lesson);
@@ -174,7 +177,9 @@ import { createBackup, parseBackup, backupValues } from './backup.js';
     if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume().catch(() => {});
     return audioCtx;
   }
-  function stopStream() {
+  function stopStream(cancelRequest = true) {
+    if (cancelRequest) micRequest++;
+    cancelMeasurement();
     if (stream) stream.getTracks().forEach((t) => t.stop());
     stream = null; analyser = null;
   }
@@ -186,12 +191,14 @@ import { createBackup, parseBackup, backupValues } from './backup.js';
     return `Non riesco ad accendere il microfono (${name || 'errore sconosciuto'}). Riprova o apri la pagina con Chrome, Edge o Firefox.`;
   }
   async function startMic() {
+    const request = ++micRequest;
     showError('');
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
       showError('Questo browser non permette di usare il microfono da qui. Apri la pagina con Chrome, Edge o Firefox aggiornati.');
       return false;
     }
     const ctx = ensureCtx();
+    if (!ctx) { showError('Questo browser non supporta l’audio. Prova Chrome, Edge o Firefox aggiornati.'); return false; }
     const base = { echoCancellation: false, noiseSuppression: false, autoGainControl: false };
     let s = null, lastErr = null;
     try {
@@ -202,9 +209,10 @@ import { createBackup, parseBackup, backupValues } from './backup.js';
         try { s = await navigator.mediaDevices.getUserMedia({ audio: base }); settings.deviceId = ''; saveSettings(); } catch (err2) { lastErr = err2; }
       }
     }
-    if (!s) { showError(micErrorText(lastErr)); if (mode === 'idle') showStart(); return false; }
+    if (request !== micRequest) { s?.getTracks().forEach(t => t.stop()); return false; }
+    if (!s) { showError(micErrorText(lastErr)); if (mode === 'idle' && !setupActive) showStart(); return false; }
     const wasMic = mode === 'mic';
-    stopStream();
+    stopStream(false);
     stream = s;
     const src = ctx.createMediaStreamSource(stream);
     analyser = ctx.createAnalyser();
@@ -215,8 +223,8 @@ import { createBackup, parseBackup, backupValues } from './backup.js';
     if (track) track.addEventListener('ended', () => {
       if (stream !== s) return;
       saveLeague(); stopStream(); mode = 'idle';
-      showError('Il microfono si è scollegato. Ricollegalo e premi «Accendi il microfono».');
       showStart();
+      showError('Il microfono si è scollegato. Ricollegalo e premi «Accendi il microfono».');
     });
     if (!wasMic) {
       league = loadLeague(); ensureLeague(); mode = 'mic'; resetRun();
@@ -410,7 +418,7 @@ import { createBackup, parseBackup, backupValues } from './backup.js';
   function updateGame(dt, now) {
     const zone = zoneOf(level);
     G.zone = zone;
-    if (paused || measuring) return;
+    if (paused || measuring || setupActive) return;
     const rate = 100 / (settings.rewardMin * 60);
     if (zone === 'bad') addBalance(-3 * rate * dt);
     else if (zone === 'ok' && !G.alert && !G.notaOpen) addBalance(rate * dt);
@@ -447,7 +455,7 @@ import { createBackup, parseBackup, backupValues } from './backup.js';
   }
 
   function moodNow(now) {
-    if (mode === 'idle' || paused || measuring) return 'sleep';
+    if (mode === 'idle' || paused || measuring || setupActive) return 'sleep';
     if (G.notaOpen || G.alert) return 'alert';
     if (now < G.grumpyUntil) return 'grumpy';
     if (G.zone !== 'ok') return 'stir';
@@ -475,7 +483,7 @@ import { createBackup, parseBackup, backupValues } from './backup.js';
     peaks.push(level);
     if (peaks.length > 30) peaks.shift();
     if (measuring) measureSamples.push(level);
-    recordHistory(dt);
+    if (!setupActive) recordHistory(dt);
     updateGame(dt, now);
     render(now);
   }
@@ -505,6 +513,11 @@ import { createBackup, parseBackup, backupValues } from './backup.js';
     if (document.body.dataset.zone !== zone) document.body.dataset.zone = zone;
     const mood = moodNow(now);
     if (stage.dataset.mood !== mood) stage.dataset.mood = mood;
+    const frameKey = settings.mascot + ':' + mood;
+    if (stage.dataset.frame !== frameKey) {
+      stage.dataset.frame = frameKey;
+      stage.style.cssText = RonfGame.mascotStyle(settings.mascot, {sleep:0,stir:1,grumpy:2,alert:3}[mood] || 0);
+    }
     renderBubble(mood, now);
     $('#stage-chip').hidden = !(paused || measuring);
     setText($('#stage-chip'), measuring ? 'Misura' : 'In pausa');
@@ -855,9 +868,20 @@ import { createBackup, parseBackup, backupValues } from './backup.js';
 
   // ---------- comandi ----------
   function showError(msg) { const e = $('#start-error'); e.textContent = msg; e.hidden = !msg; }
-  function showStart() { $('#start').hidden = false; document.body.dataset.mode = 'idle'; render(performance.now()); }
+  function showStart() {
+    document.body.classList.add('preparing');
+    $('#start').getAnimations().forEach(a => a.cancel()); $('#start').hidden = false; $('.app').inert = true;
+    if (welcome) { if (setupActive) welcome.disconnected(); else welcome.reset(); }
+    document.body.dataset.mode = 'idle'; render(performance.now());
+  }
   function onStarted() {
-    $('#start').hidden = true;
+    if (setupActive) { renderAll(); return; }
+    document.body.classList.remove('preparing');
+    const start = $('#start'); $('.app').inert = false;
+    if (!start.hidden && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      start.animate([{opacity:1,transform:'translateY(0)'},{opacity:0,transform:'translateY(-18px)'}],{duration:320,easing:'cubic-bezier(.16,1,.3,1)'}).finished.then(()=>{start.hidden=true;$('#btn-pause').focus();}).catch(()=>{});
+      $('.board').animate([{opacity:.35,transform:'translateY(18px)'},{opacity:1,transform:'translateY(0)'}],{duration:450,easing:'cubic-bezier(.16,1,.3,1)'});
+    } else { start.hidden = true; $('#btn-pause').focus(); }
     $('#demo-chip').hidden = mode !== 'demo';
     document.body.dataset.mode = mode;
     keepAwake();
@@ -901,7 +925,7 @@ import { createBackup, parseBackup, backupValues } from './backup.js';
     } catch (e) { wakeLock = null; }
   }
   document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible' && mode !== 'idle') keepAwake();
+    if (document.visibilityState === 'visible' && mode !== 'idle' && !setupActive) keepAwake();
     else saveLeague();
   });
   window.addEventListener('pagehide', saveLeague);
@@ -1030,30 +1054,35 @@ import { createBackup, parseBackup, backupValues } from './backup.js';
     $('#data-status').textContent='Classi salvate su questo browser.';
   }
   $('#save-classes').addEventListener('click', updateClasses);
-  function measureSilence() {
+  function measureSilence(report = () => {}) {
     const status = $('#measure-status');
-    if (mode === 'idle') { status.textContent = 'Accendi prima il microfono.'; return; }
-    if (measuring) return;
+    if (mode !== 'mic' || !stream) { status.textContent = 'Accendi prima il microfono.'; return Promise.resolve(null); }
+    if (measuring) return Promise.resolve(null);
     measuring = true; measureSamples = []; measureLeft = 5;
     const btn = $('#measure'); btn.disabled = true;
-    status.textContent = `Silenzio, sto ascoltando… ${measureLeft}`;
-    const timer = setInterval(() => {
-      measureLeft--;
-      if (measureLeft > 0) { status.textContent = `Silenzio, sto ascoltando… ${measureLeft}`; return; }
-      clearInterval(timer);
-      measuring = false; btn.disabled = false;
-      if (!measureSamples.length) { status.textContent = 'Non ho sentito niente: controlla il microfono e riprova.'; return; }
-      const sorted = measureSamples.slice().sort((a, b) => a - b);
-      const base = sorted[Math.floor(sorted.length / 2)];
-      settings.warn = clamp(Math.round(base + 10), 35, 93);
-      settings.alert = clamp(Math.round(base + 20), settings.warn + 2, 95);
-      afterThresholdChange();
-      const msg = `Silenzio dell’aula: ${Math.round(base)} dB. Nuove soglie: attenzione ${settings.warn} dB, SILENZIO! ${settings.alert} dB.`;
-      status.textContent = msg;
-      if (!dlg.open) notify('Soglie regolate', msg, 'good', false);
-    }, 1000);
+    return new Promise((resolve, reject) => {
+      let timer;
+      const finish = () => { clearInterval(timer); measuring = false; btn.disabled = false; cancelMeasurement = () => {}; };
+      cancelMeasurement = () => { finish(); resolve(null); };
+      const progress = () => { status.textContent = `Silenzio, sto ascoltando… ${measureLeft}`; report(measureLeft); };
+      progress();
+      timer = setInterval(() => {
+        if (mode !== 'mic' || !stream) { cancelMeasurement(); return; }
+        measureLeft--;
+        if (measureLeft > 0) { progress(); return; }
+        finish();
+        try {
+          const result = silenceThresholds(measureSamples);
+          settings.warn = result.warn; settings.alert = result.alert; afterThresholdChange();
+          const msg = `Silenzio dell’aula: ${result.base} dB. Attenzione da ${result.warn} dB, troppo rumore da ${result.alert} dB.`;
+          status.textContent = msg;
+          if (!dlg.open && !setupActive) notify('Soglie regolate', msg, 'good', false);
+          resolve(result);
+        } catch (error) { status.textContent = error.message; reject(error); }
+      }, 1000);
+    });
   }
-  $('#measure').addEventListener('click', measureSilence);
+  $('#measure').addEventListener('click', () => measureSilence().catch(() => {}));
   $('#new-lesson').addEventListener('click', async () => {
     saveLeague(); resetSession(); saveLesson(); renderAll();
     $('#data-status').textContent = `Nuova lezione per la ${current}: letargo, combo e preavvisi ripartono da zero.`;
@@ -1076,22 +1105,79 @@ import { createBackup, parseBackup, backupValues } from './backup.js';
   });
 
   // ---------- eventi ----------
-  $('#start-mic').addEventListener('click', async (e) => {
-    const btn = e.currentTarget;
-    btn.disabled = true; btn.textContent = 'Attendo il permesso…';
-    await startMic();
-    btn.disabled = false; btn.textContent = 'Accendi il microfono';
+  let previousSetupStep = '';
+  function renderSetup(state) {
+    const content = $('#setup-content'), title = $('#start-title');
+    const titles = {microphone:'Microfono?',quiet:'Shhh…',class:'La tua classe?',quick:'Si ronfa?'};
+    const changed = previousSetupStep !== state.step;
+    content.getAnimations().forEach(a => a.cancel());
+    document.querySelectorAll('[data-setup-step]').forEach(panel => { panel.hidden = panel.dataset.setupStep !== state.step; });
+    title.textContent = titles[state.step];
+    $('#setup-progress').hidden = state.step === 'quick';
+    document.querySelectorAll('[data-progress]').forEach(item => {
+      if (item.dataset.progress === state.step) item.setAttribute('aria-current','step'); else item.removeAttribute('aria-current');
+    });
+    for (const id of ['setup-connect','setup-measure','setup-skip','setup-back','setup-play','setup-again','start-mic','start-demo']) $('#'+id).disabled = state.busy;
+    $('#setup-connect').textContent = state.busy && state.step === 'microphone' ? 'Attendo il permesso…' : state.connected ? 'Microfono pronto. Avanti' : 'Accendi';
+    $('#start-mic').textContent = state.busy ? 'Attendo il permesso…' : 'Accendi il microfono';
+    $('#setup-measure').textContent = 'Misura il silenzio';
+    $('#setup-measure').hidden = state.busy && state.step === 'quiet';
+    $('#setup-skip').hidden = state.step !== 'quiet';
+    $('.setup-bottom').hidden = state.busy && state.step === 'quiet';
+    $('#setup-count').hidden = !(state.busy && state.step === 'quiet');
+    $('#setup-back').hidden = !['quiet','class'].includes(state.step);
+    $('#start-demo').hidden = state.step !== 'microphone';
+    $('#setup-again').hidden = state.step !== 'quick';
+    $('#setup-result').hidden = true;
+    if (state.result) $('#setup-result').textContent = `Aula tarata. Attenzione da ${state.result.warn} dB, troppo rumore da ${state.result.alert} dB.`;
+    if (state.error) showError(state.error); else if (changed) showError('');
+    if (changed && previousSetupStep) {
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) content.animate([{opacity:0,transform:'translateX(18px)',filter:'blur(3px)'},{opacity:1,transform:'translateX(0)',filter:'blur(0)'}],{duration:320,easing:'cubic-bezier(.16,1,.3,1)'});
+      title.focus({preventScroll:true});
+    }
+    previousSetupStep = state.step;
+  }
+  welcome = createSetupFlow({
+    remembered: readJSON('ronf:v1:setup') === true,
+    connect: async guided => {
+      setupActive = guided;
+      try {
+        const ok = await startMic();
+        if (!ok) throw new Error($('#start-error').textContent || 'Riprova ad accendere il microfono.');
+        return true;
+      } catch (error) { stopStream(); setupActive = false; mode = 'idle'; throw error; }
+    },
+    measure: () => measureSilence(left => {
+      $('#setup-count').textContent = left;
+      $('#setup-status').textContent = `${left} ${left === 1 ? 'secondo' : 'secondi'}… shhh.`;
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) $('#setup-count').animate([{transform:'scale(.85)',opacity:.55},{transform:'scale(1)',opacity:1}],{duration:350,easing:'cubic-bezier(.16,1.25,.3,1)'});
+    }),
+    play: () => { setupActive = false; lastTick = performance.now(); onStarted(); },
+    demo: () => { setupActive = false; startDemo(); },
+    stop: () => { stopStream(); setupActive = false; mode = 'idle'; },
+    remember: () => { writeJSON('ronf:v1:setup',true); welcome.completed(); },
+    onChange: renderSetup,
   });
-  $('#start-demo').addEventListener('click', startDemo);
-  $('#start-measure').addEventListener('click', async (e) => {
-    const btn = e.currentTarget;
-    btn.disabled = true;
-    if (await startMic()) measureSilence();
-    btn.disabled = false;
+  document.body.classList.add('preparing');
+  welcome.show();
+  $('#setup-connect').addEventListener('click', () => welcome.connect());
+  $('#setup-measure').addEventListener('click', () => welcome.measure());
+  $('#setup-skip').addEventListener('click', () => welcome.skip());
+  $('#setup-back').addEventListener('click', () => welcome.back());
+  $('#setup-again').addEventListener('click', () => welcome.guide());
+  $('#start-mic').addEventListener('click', () => welcome.quick());
+  $('#start-demo').addEventListener('click', () => welcome.demo());
+  $('#setup-play').addEventListener('click', async () => {
+    const input = $('#setup-class-name'), name = input.value.trim();
+    if (name) {
+      const classes = cleanClasses([...settings.classes,name]);
+      if (!classes?.includes(name)) { showError('Usa un nome valido, di massimo 24 caratteri. Puoi gestire le classi nelle impostazioni.'); input.focus(); return; }
+      settings.classes = classes; ensureLeague(); saveSettings(); await switchClass(name); renderChips(); input.value = '';
+    }
+    welcome.launch();
   });
   $('#bal-plus').addEventListener('click', () => adjustBalance(5));
   $('#bal-minus').addEventListener('click', () => adjustBalance(-5));
-  $('#start-settings').addEventListener('click', openSettings);
   $('#demo-chip').addEventListener('click', startMic);
   $('#btn-pause').addEventListener('click', togglePause);
   $('#btn-full').addEventListener('click', toggleFull);
@@ -1100,6 +1186,15 @@ import { createBackup, parseBackup, backupValues } from './backup.js';
   $('#relief').addEventListener('click', () => { $('#relief').hidden = true; });
   document.addEventListener('keydown', (e) => {
     if (e.ctrlKey || e.metaKey || e.altKey || document.querySelector('dialog[open]')) return;
+    if (!$('#start').hidden) {
+      if (e.key === 'Tab') {
+        const items = [...$('#start').querySelectorAll('a[href],button:not(:disabled),select,input,summary')].filter(el => el.getClientRects().length);
+        const first = items[0], last = items.at(-1);
+        if (e.shiftKey && (document.activeElement === first || document.activeElement === $('#start-title'))) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+      return;
+    }
     const tag = (e.target && e.target.tagName || '').toLowerCase();
     if (tag === 'input' || tag === 'select' || tag === 'textarea') return;
     if (e.key === 'Escape' && G.notaOpen) { closeNota(true); return; }
@@ -1143,13 +1238,12 @@ import { createBackup, parseBackup, backupValues } from './backup.js';
   });
   $('#hour-continue').addEventListener('click',continueHour);$('#hour-finish').addEventListener('click',finishLesson);
   setInterval(()=>{
-    if(mode!=='mic'||!settings.autoEnd)return;
+    if(mode!=='mic'||setupActive||!settings.autoEnd)return;
     const state=RonfClock.hourState(G.scheduledEndAt);
     $('#hour-prompt').hidden=!state.pending;$('#hour-countdown').textContent=state.remaining;
     if(state.expired)finishLesson();
   },1000);
   $('#btn-about').addEventListener('click',()=>$('#about').showModal());
-  $('#welcome-about').addEventListener('click',()=>$('#about').showModal());
   let pendingBackup=null;
   const importPanel=$('#import-preview'),dataStatus=$('#data-status');
   $('#export-backup').addEventListener('click',()=>{
@@ -1182,6 +1276,15 @@ import { createBackup, parseBackup, backupValues } from './backup.js';
     }
     stopStream();location.reload();
   });
+  if (window.parent !== window) {
+    $('.start-brand').addEventListener('click', event => { event.preventDefault(); window.parent.postMessage({type:'ronf:home'},location.origin); });
+    window.addEventListener('message', event => {
+      if (event.origin !== location.origin || event.source !== window.parent || event.data?.type !== 'ronf:stop') return;
+      saveLeague(); stopStream(); mode = 'idle'; setupActive = false; wakeLock?.release().catch(()=>{});
+    });
+    window.parent.postMessage({type:'ronf:ready'},location.origin);
+  }
+  window.addEventListener('pagehide', () => { saveLeague(); stopStream(); });
   try{const key='ronf:storage-check';localStorage.setItem(key,'1');localStorage.removeItem(key);}catch{
     const note=document.createElement('p');note.className='error';note.textContent='Questo browser non permette i salvataggi: puoi giocare, ma i progressi andranno persi quando chiudi la pagina.';$('#start-error').after(note);
   }

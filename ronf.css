@@ -51,3 +51,87 @@ body[data-zone=ok] .zone-pill{background:#246c43;color:#fff}
   .stage{min-height:49rem}
   .stage .readout,.stage .patience{bottom:8rem}
 }
+
+/* La stessa identità della home, con gerarchia da tabellone. */
+@font-face{font-family:Outfit;font-weight:100 900;font-display:swap;src:url('./assets/fonts/outfit.ttf') format('truetype')}
+:root{--paper:#fffdf3;--card:#fffdf3;--ink:#173c32;--forest:#173c32;--muted:#4b6252;--line:#c9d2ae;--violet:#173c32;--violet-soft:#edf1cf;--font-body:Outfit,sans-serif;--font-display:Outfit,sans-serif;scrollbar-color:#718657 #fffdf3;accent-color:#173c32}
+body[data-zone=ok]{--tint:#fffdf3}
+::selection{background:#f4ad8b;color:#173c32}
+a{color:#173c32}input,textarea{caret-color:#173c32}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline-color:#173c32}
+.top{background:#eaf17f;border-bottom:0}
+.btn{border-radius:10px;background:#fffdf3;min-height:40px;font-size:max(.95rem,12px)}
+.btn:hover{background:#edf1cf}.btn.primary,.start-actions .primary{background:#173c32;border-color:#173c32;color:#fffdf3}.btn.primary:hover{background:#2e5545}
+.brand-home,.start-brand{display:inline-flex;align-items:center;gap:.5rem;font-family:Outfit,sans-serif;font-weight:900;letter-spacing:-.04em;color:#173c32}
+.top .brand-home{font-size:2rem;padding:.1rem .3rem;background:transparent}
+.brand-home img,.start-brand img{display:block;flex:none}
+.brand-home span,.start-brand span{position:static;font:inherit;transform:none;letter-spacing:normal;color:inherit;margin-left:-.5rem}
+.app-name{font-family:Outfit,sans-serif;font-weight:500;color:#173c32}
+.class-picker{font-family:Outfit,sans-serif;background:#fffdf3;border-color:#7e9468;color:#173c32;border-radius:10px}
+.db-value,.pat-secs,.big,.bal,.level-emblem strong,.stage .rank-copy>strong{font-weight:800}
+.stage .score{background:#fffdf3;border-color:#b9c89e}
+.stage .score .label,.stage .score .stat .big,.stage .score .stat:first-child>.sub,.stage .score .combo-dial .big,.stage .combo-rate,.stage .combo .sub,.stage .combo-help{color:#173c32}
+.stage .score .stat+.stat{border-color:#c9d2ae}.combo-ring-track{stroke:#d7dfb7}#combo-ring-fill{stroke:#173c32}
+.stage .readout,.stage .patience{background:#fffdf3;border-color:#b9c89e}
+.bubble{box-shadow:none}.stage .stage-chip{font-family:Outfit,sans-serif}.stage .rank-progress i{background:#eaf17f}
+.lesson-outcome .session-history,.history-empty{background:#173c32}
+dialog{box-shadow:0 12px 46px rgba(10,27,24,.22);border:0;background:#fffdf3}
+dialog h2,dialog h3,.stage .banner{font-family:Outfit,sans-serif;font-weight:800}
+.start{background:#eaf17f;-webkit-backdrop-filter:none;backdrop-filter:none;padding:1.5rem;overscroll-behavior:contain}
+.start-card{display:block;width:100%;max-width:44rem;padding:2rem;background:transparent;border:0;border-radius:0;box-shadow:none;color:#173c32}
+.start-brand{font-size:2.3rem;line-height:1;margin-bottom:2.5rem}
+.welcome-mascot{width:7rem;height:7rem;top:1.2rem;right:2rem}
+.setup-progress{display:flex;gap:1.5rem;padding:0;margin:0 0 1.8rem;list-style:none;font-size:max(.9rem,12px);font-weight:500;color:#4b6252}
+.setup-progress li{padding-bottom:.5rem;border-bottom:2px solid transparent}
+.setup-progress [aria-current=step]{font-weight:700;color:#173c32;border-color:#173c32}
+.start h2{font-family:Outfit,sans-serif;font-size:3rem;line-height:1.04;font-weight:900;letter-spacing:-.035em;max-width:20ch;margin:0 0 1.2rem}
+.start h2:focus{outline:none}
+.setup-description{font-size:1.15rem;line-height:1.55;max-width:48ch;margin:0 0 1.4rem}
+.setup-main{justify-content:center;min-height:54px;padding:.9rem 1.3rem;font-size:1.1rem;gap:1rem}
+.setup-main span{font-size:1.35em}
+.setup-help{font-size:max(.9rem,12px);line-height:1.5;max-width:48ch;margin:1rem 0 0;color:#4b6252}
+.quiet-count{font-size:5rem;font-weight:800;line-height:1;margin:.5rem 0 1rem;font-variant-numeric:tabular-nums}
+.setup-status{font-size:1rem;line-height:1.5;margin:0 0 1rem}
+.setup-status:empty{display:none}
+.setup-result{font-size:1rem;font-weight:600;line-height:1.5;margin-bottom:1.5rem}
+.start-row{margin:1.4rem 0}.start-row .label{font-size:1rem;color:#173c32}
+.start .class-picker{min-height:44px}
+.new-class{margin:0 0 1.5rem}.new-class summary{cursor:pointer;font-size:1rem;padding:.4rem 0}.new-class label{display:block;margin:.75rem 0 .4rem;font-weight:600}
+.new-class input{font:inherit;max-width:100%;padding:.65rem .8rem;border:1px solid #7e9468;border-radius:10px;background:#fffdf3;color:#173c32}
+.new-class .setup-help{margin-top:.5rem}
+.setup-bottom{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin:1.8rem 0 0}
+.start .start-note{font-size:max(.85rem,12px);line-height:1.5;color:#4b6252;margin-top:1.4rem}
+.start .privacy-note{border-top:1px solid #b5c17f;padding-top:1rem;color:#173c32}
+.start .welcome-links{font-size:max(.85rem,12px);margin-top:1rem;align-items:center}
+.start .error{font-size:1rem;line-height:1.5;padding:1rem;background:#fffdf3;border-radius:12px;margin-top:1rem}
+@media(max-width:620px){
+ .start{padding:.75rem;align-items:center}.start-card{padding:1rem .65rem}.start-brand{font-size:2rem;margin-bottom:2.5rem}.start-brand img{width:40px;height:35px}
+ .welcome-mascot{width:6rem;height:6rem;right:.6rem;top:.5rem}.setup-progress{gap:1rem;font-size:.9rem;margin-bottom:1.5rem}
+ .start h2{font-size:2.5rem;max-width:20ch}.setup-description{font-size:1.1rem}.setup-main{width:100%;font-size:1rem}
+ .setup-bottom{margin-top:1.5rem}.start .welcome-links{display:flex;justify-content:space-between}.brand-home img{width:34px;height:30px}
+}
+
+/* Ogni posa usa la sua finestra alpha, senza parti della riga vicina. */
+.stage[data-mood] .mascot-sprite{inset:auto;left:50%;bottom:3%;width:var(--mascot-width,100%);height:var(--mascot-height,100%);transform:translateX(-50%);background-position:var(--mascot-col,0%) var(--mascot-row,0%)}
+.mascot-preview{height:auto;aspect-ratio:var(--mascot-aspect,1);background-position:var(--mascot-col,0%) var(--mascot-row,0%)}
+
+/* Una decisione per schermata. */
+body.preparing{overflow:hidden}
+input::placeholder,textarea::placeholder{color:#4b6252;opacity:1}
+.start-card{max-width:34rem;padding:1.5rem}
+.start-brand{margin-bottom:3rem}
+.welcome-mascot{right:1.5rem;top:.7rem;width:6rem;height:6rem}
+.setup-progress{gap:.55rem;margin-bottom:1.5rem}
+.setup-progress li{width:9px;height:9px;padding:0;border:1px solid #173c32;border-radius:50%;background:transparent}
+.setup-progress [aria-current=step]{border:1px solid #173c32;background:#173c32}
+.start h2{font-size:3rem;margin-bottom:1rem;max-width:none}
+.setup-description{font-size:1.1rem;line-height:1.5;margin-bottom:1.7rem}
+.setup-main{width:100%;min-height:54px;justify-content:center}
+.setup-bottom{margin-top:.75rem}
+.setup-bottom .setup-secondary{flex:1;justify-content:center;min-height:44px;border:1px solid #7e9468;border-radius:12px;background:transparent;color:#173c32;padding:.65rem 1rem;text-decoration:none;font-size:1rem;font-weight:500;line-height:1.3}
+.setup-bottom .setup-secondary:hover{background:#dce677;border-color:#173c32}
+.setup-bottom .setup-secondary:active{background:#d0dd6d}
+.start-row .class-picker{width:100%;min-height:48px}.start-row,.start-row .chips{width:100%}
+.new-class{margin-bottom:1.2rem}.new-class summary{font-size:.95rem}
+.quiet-count{font-size:5rem;margin:1.5rem 0}
+@media(max-width:620px){.start-card{padding:1.1rem .65rem}.start h2{font-size:2.7rem}.welcome-mascot{right:.6rem;top:.4rem}.setup-description{font-size:1.05rem}}

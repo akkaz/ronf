@@ -41,3 +41,7 @@ Outfit e Caveat provengono dal repository ufficiale Google Fonts (`ofl/outfit` e
 ## Marchio Ronf
 
 `assets/ronf-mark.svg` riusa il solo volto addormentato di `assets/marmotta.svg`, con le stesse forme e gli stessi colori. Usato accanto al nome nella landing e come favicon. Nessuna nuova illustrazione generata.
+
+## Finestre delle pose
+
+`mascot-frames.js` contiene i rettangoli delle 64 pose degli atlanti originali, misurati sui componenti alpha. Le righe degli atlanti non sono perfettamente regolari: usare una griglia uniforme tagliava alcuni personaggi e mostrava parti dell’animale vicino. I rettangoli correggono la visualizzazione CSS, mantenendo proporzioni e un margine, senza modificare le immagini originali. La marmotta SVG originale è riusata anche nella home per i suoi quattro stati.

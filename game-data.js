@@ -1,3 +1,4 @@
+import { MASCOT_FRAMES } from './mascot-frames.js';
 // Shared rules for portal, classroom board and server. No level cap.
 export const CLASSES=['La mia classe'];
 export const MASCOT_VERSION=2;
@@ -28,9 +29,12 @@ export function resolveMascot(profile={},classId){
   // new choices (including marmot) carry a version and are never reassigned.
   return Object.hasOwn(MASCOTS,profile.mascot)&&(profile.mascot!=='marmot'||profile.mascotVersion===MASCOT_VERSION)?profile.mascot:defaultMascot(classId);
 }
-export function mascotStyle(id){
+export function mascotStyle(id,pose=0){
   const m=MASCOT_CATALOG[id]||MASCOT_CATALOG.marmot;
-  return m.sheet?`--mascot-sheet:url('./assets/${m.sheet}');--mascot-size:400% ${m.rows*100}%;--mascot-row:${m.row/(m.rows-1)*100}%`:"--mascot-sheet:url('./assets/marmotta.svg');--mascot-size:contain;--mascot-row:50%";
+  if(!m.sheet)return "--mascot-sheet:url('./assets/marmotta.svg');--mascot-size:contain;--mascot-col:50%;--mascot-row:50%;--mascot-width:100%;--mascot-height:100%;--mascot-aspect:1";
+  const atlas=MASCOT_FRAMES[id],f=atlas.frames[Math.max(0,Math.min(3,Math.floor(pose)||0))];
+  const max=Math.max(f.w,f.h)*1.08;
+  return `--mascot-sheet:url('./assets/${m.sheet}');--mascot-size:${atlas.width/f.w*100}% ${atlas.height/f.h*100}%;--mascot-col:${f.x/(atlas.width-f.w)*100}%;--mascot-row:${f.y/(atlas.height-f.h)*100}%;--mascot-width:${f.w/max*100}%;--mascot-height:${f.h/max*100}%;--mascot-aspect:${f.w}/${f.h}`;
 }
 export function levelAt(number){const n=Math.max(1,Math.floor(number));return 900*(n-1)**2;}
 export function level(points){

@@ -8,13 +8,13 @@ Un gioco cooperativo per il rumore in aula. La mascotte dorme quando c’è calm
 
 ## Per usarlo in classe
 
-1. Apri il sito sul computer collegato alla LIM e premi **Accendi Ronf**.
-2. Scegli la classe. In **Impostazioni → Classi** puoi scrivere i tuoi nomi, separati da virgola.
-3. Accendi il microfono. **Accendi e misura il silenzio** regola le soglie dopo cinque secondi di calma.
+1. Apri il sito sul computer collegato alla LIM e premi **Apri Ronf**.
+2. Al primo avvio segui tre passaggi: accendi il microfono, misura cinque secondi di silenzio (oppure salta), scegli o aggiungi la classe.
+3. Premi **Avvia la lezione**. Nei successivi accessi puoi partire subito o rifare la preparazione. Durante il wizard non si guadagnano punti e non si consuma pazienza.
 4. Scegli mascotte e premi nelle impostazioni. Le conseguenze sono facoltative, inizialmente vuote.
 5. Usa **Pausa** mentre spieghi; **Termina** conclude la lezione e conserva XP e record.
 
-Puoi esplorare il gioco con **Guarda la simulazione**, senza microfono e senza salvare punti. Il rumore adatto dipende dall’attività: regola le soglie per il lavoro individuale o di gruppo.
+Puoi esplorare il gioco con **Prova senza microfono**, senza salvare punti. Il rumore adatto dipende dall’attività: regola le soglie per il lavoro individuale o di gruppo. La home mostra automaticamente le 17 mascotte e i loro stati: il nome nel titolo segue il personaggio. Il giro si ferma al passaggio del mouse e con l’opzione di sistema per ridurre il movimento; il comando di pausa è raggiungibile da tastiera.
 
 Gli **XP** fanno crescere il livello tra lezioni; l’**energia** riparte da zero e determina i premi della lezione. Le combo moltiplicano gli XP, non l’energia. Il docente può aggiungere o togliere energia manualmente.
 
@@ -52,6 +52,8 @@ Pubblica il contenuto di `dist/` su un hosting statico HTTPS. Tutti i percorsi s
 Per bug e proposte apri una issue indicando browser, dispositivo, passaggi e comportamento atteso. Non allegare audio dell’aula, nomi o dati degli studenti. Per una modifica, crea un branch e una pull request e verifica `npm test` e il gioco su computer e telefono.
 
 - `app.js`: microfono, regole della lezione, UI e salvataggi locali.
+- `entry.js`: ingresso animato e rotazione delle mascotte nella home.
+- `setup-flow.js`: flusso della preparazione e calcolo delle soglie.
 - `game-data.js`: mascotte e progressione dei livelli.
 - `backup.js`: formato e validazione dei backup.
 - `lesson-clock.js`: promemoria facoltativi secondo l’ora locale.

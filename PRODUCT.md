@@ -16,12 +16,13 @@ Gioco cooperativo per aiutare la classe a trovare un rumore adatto al lavoro. La
 
 ## Brand Commitments
 
-Nome scelto dal docente: Ronf. Indirizzo ronf.akkaz.dev. Landing A1 approvata nella pagina di confronto: lime, verde scuro, lettere grandi e payoff aggiornato dall’autore: «Bro 🤫 La marmotta è nel chill.». Tono breve, ironico e da aula, senza formule promozionali. Usare la stessa identica marmotta del gioco; il piccolo marchio riprende il suo volto addormentato. Il tabellone conserva la sua identità, le mascotte e la scena.
+Nome scelto dal docente: Ronf. Indirizzo ronf.akkaz.dev. Landing A1 approvata: lime, verde scuro, lettere grandi e payoff «Bro 🤫 [nome della mascotte] è nel chill.». Le 17 mascotte ruotano automaticamente ogni quattro secondi circa, mostrando anche i diversi stati; il nome cambia insieme al personaggio ed è sottolineato come a mano. Nessun comando visibile per il cambio manuale. Tono breve, ironico e da aula, senza formule promozionali. Il marchio riprende il volto addormentato della marmotta originale. Il gioco condivide palette, logo e caratteri della home, conservando personaggi, paesaggio e colori semantici del rumore.
 
 ## Capabilities and Constraints
 
 - Vista Operate: grandi simboli e pochi testi, leggibili dalla LIM.
-- Ingresso diretto al gioco: scelta classe, microfono o simulazione, accesso alle impostazioni.
+- Primo avvio guidato: microfono, taratura facoltativa di cinque secondi e classe. Testi minimi, una CTA e una sola riga di azioni secondarie pertinenti al passaggio. Nessuna pila di link o opzioni nel wizard. Successivi accessi rapidi; guida ripetibile. Simulazione senza microfono dalla prima schermata.
+- Preparazione sospende XP, energia e pazienza; i passaggi non ricaricano il gioco.
 - Energia della lezione e XP cumulativi hanno funzione e nomi distinti.
 - Nessun login, database, classifica fra scuole o API scolastica.
 - Conseguenze facoltative, inizialmente vuote. Premi e mascotte per classe.
@@ -31,7 +32,7 @@ Nome scelto dal docente: Ronf. Indirizzo ronf.akkaz.dev. Landing A1 approvata ne
 
 ## Operating Context
 
-La landing approvata riprende `.impeccable/mocks/decision/round2-a1.html`, con gli aggiornamenti diretti dell’autore: payoff e spiegazione breve, marmotta originale grande e contenuto centrato verticalmente. «Apri Ronf» è il pulsante principale verso `gioca.html`; «GitHub» è il pulsante secondario verso il codice. Gratuità e firma discreta «akkaz» restano leggibili. Il microfono si accende solo entrando nel gioco e scegliendo di usarlo. Il docente usa un computer con microfono collegato alla LIM; sul telefono può esplorare e configurare il gioco.
+La landing riprende A1 con i successivi aggiornamenti diretti dell’autore: spiegazione breve, mascotte grande e contenuto centrato verticalmente. «Apri Ronf» è principale, GitHub secondario; firma discreta «akkaz». Il lancio mantiene il documento principale e apre il gioco della stessa origine con una transizione animata; URL diretto e tasto indietro restano funzionanti. Wizard e avvio sono animati e rispettano riduci movimento. Il microfono si accende solo con l’azione esplicita dell’utente. Il docente usa un computer collegato alla LIM; sul telefono può esplorare e configurare il gioco.
 
 ## Positioning
 
@@ -50,4 +51,4 @@ Tabellone e mascotte del progetto originale, già provati in aula. Non inventare
 
 ## Accessibility & Inclusion
 
-Atkinson Hyperlegible, contrasto leggibile, tastiera, focus visibile, testi accanto ai colori e rispetto di prefers-reduced-motion. Il docente mantiene il controllo di soglie, pause, energia e ricompense.
+Outfit leggibile, tastiera, focus visibile, testi accanto ai colori e rispetto di prefers-reduced-motion. La rotazione si ferma al passaggio del mouse; un comando di pausa compare al focus da tastiera. Con movimento ridotto non parte automaticamente. Il docente mantiene il controllo di soglie, pause, energia e ricompense.

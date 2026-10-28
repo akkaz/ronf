@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Ronf · Fate squadra. Non svegliatela.</title>
 <meta name="description" content="Fate squadra. Non svegliate la marmotta. Ronf trasforma il rumore in aula in un gioco cooperativo: gratuito e open source, senza account né registrazioni audio.">
-<meta name="theme-color" content="#233f38">
+<meta name="theme-color" content="#eaf17f">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23233f38'/%3E%3Crect x='6' y='18' width='5' height='8' rx='1.5' fill='%232e8b57'/%3E%3Crect x='13.5' y='12' width='5' height='14' rx='1.5' fill='%23e3a008'/%3E%3Crect x='21' y='6' width='5' height='20' rx='1.5' fill='%23d63a2c'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="./board.css">
 <link rel="stylesheet" href="./lesson-board.css">
 <link rel="stylesheet" href="./ronf.css">
-<link rel="icon" href="./assets/marmotta.svg" type="image/svg+xml">
+<link rel="icon" href="./assets/ronf-mark.svg" type="image/svg+xml">
 <link rel="canonical" href="https://ronf.akkaz.dev/gioca.html">
 <meta property="og:title" content="Ronf · Non svegliatela">
 <meta property="og:description" content="La marmotta che aiuta la classe a fare squadra. Gratis, open source, senza account.">
@@ -18,9 +18,9 @@
 <meta property="og:url" content="https://ronf.akkaz.dev/gioca.html">
 </head>
 <body data-zone="ok" data-auth="ready">
-<div class="app">
+<div class="app" inert>
   <header class="top">
-    <button class="btn brand-home" id="back-to-class" type="button" aria-label="Torna alla schermata iniziale">Ronf<span aria-hidden="true">zz</span></button>
+    <button class="btn brand-home" id="back-to-class" type="button" aria-label="Torna alla schermata iniziale"><img src="./assets/ronf-mark.svg" width="40" height="35" alt="">Ronf<span aria-hidden="true">.</span></button>
     <h1 class="app-name">Fate squadra. Non svegliatela.</h1>
     <div class="top-classes"><span class="label">Classe</span><div class="chips" data-chips></div></div>
     <button class="demo-chip" id="demo-chip" type="button" hidden>Demo · passa al microfono</button>
@@ -35,7 +35,7 @@
 
   <main class="board">
     <section class="stage" id="stage" data-mood="sleep" aria-label="La marmotta">
-      
+
       <div class="sky sky-night"></div><div class="sky sky-dawn"></div><div class="sky sky-day"></div><div class="sky sky-alarm"></div>
       <svg class="range" viewBox="0 0 400 120" preserveAspectRatio="none" aria-hidden="true">
         <path class="r-back" d="M0 70 40 52 72 64 120 30 150 50 190 20 214 40 262 16 300 46 340 34 400 56V120H0Z"/>
@@ -84,7 +84,7 @@
       </div>
       <div class="banner" aria-hidden="true">SILENZIO!<small id="banner-sub">richiamo tra 10 s</small></div>
       <div class="stage-chip" id="stage-chip" hidden>In pausa</div>
-      
+
       <section class="panel readout" aria-label="Rumore in aula">
       <div class="readout-head"><p class="label">Rumore</p><p class="db-meta">stima del browser · picco degli ultimi 3 s: <b id="db-peak">--</b> dB</p><span class="zone-pill" id="zone-pill">In attesa</span></div>
       <div class="readout-main">
@@ -108,7 +108,7 @@
 <section class="panel score" aria-label="Esperienza della classe, letargo e combo">
       <div class="stat"><p class="label">Letargo</p><p class="big" id="streak">00:00</p><p class="sub">record <span id="record-class">La mia classe</span>: <b id="record">00:00</b></p><small id="record-author"></small></div>
       <div class="stat combo" id="combo-box"><p class="label">Combo XP</p><div class="combo-dial"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="combo-ring-track" cx="50" cy="50" r="43"/><circle id="combo-ring-fill" cx="50" cy="50" r="43" pathLength="100"/></svg><p class="big" id="combo">×1</p></div><p class="combo-rate" id="combo-rate">1 secondo verde = 1 XP</p><div class="combo-meter" aria-hidden="true"><i id="combo-fill"></i></div><p class="sub" id="combo-next">×2 tra 01:00</p><button class="combo-help" id="combo-help" type="button" aria-label="Come funziona la combo XP" title="Come funziona la combo XP">?</button></div>
-      
+
     </section>
 <section class="warning-dock" id="nota" data-phase="1" aria-labelledby="nota-title" hidden>
         <div class="warning-top"><span id="nota-kicker">Richiamo 1 di 4</span><button class="btn" id="nota-close" type="button">Chiudi · docente</button></div>
@@ -121,13 +121,13 @@
       </section>
     </section>
 
-    
 
-    
 
-    
 
-    
+
+
+
+
 <section class="lesson-outcome" aria-label="Rumore, energia, premi e conseguenze"><section class="session-history" aria-labelledby="history-title">
         <div class="history-heading"><h2 id="history-title">Rumore nell’ora</h2><span id="history-summary">In attesa del microfono</span></div>
         <canvas id="lesson-chart" role="img" aria-label="Rumore dall’inizio della lezione, in decibel"></canvas>
@@ -151,28 +151,46 @@
 
 <div class="overlay start" id="start" role="dialog" aria-modal="true" aria-labelledby="start-title">
   <div class="start-card">
-    <a class="start-brand" href="./" aria-label="Ronf, pagina iniziale">Ronf<span aria-hidden="true">zz</span></a><img class="welcome-mascot" src="./assets/marmotta.svg" width="140" height="140" alt="La marmotta dorme tranquilla">
-    <h2 id="start-title">Pronti per il pisolino?</h2>
-    <p>Scegli la classe e accendi il microfono. Oppure esplora il gioco con la simulazione.</p>
-    <div class="game-guide"><div><b>★ XP della classe</b><span>Restano su questo browser e fanno crescere la mascotte tra una lezione e l’altra.</span></div><div><b>ϟ Energia della lezione</b><span>Da −100 a +100. Riparte da 0: a 25, 50, 75 e 100 sbloccate i premi.</span></div></div>
-    <ul class="rules">
-      <li><i style="background:var(--ok)"></i><span><b>Verde:</b> dorme. Guadagnate XP ed energia. Le combo moltiplicano gli XP.</span></li>
-      <li><i style="background:var(--warn)"></i><span><b>Giallo:</b> si agita. XP ed energia restano fermi finché non torna la calma.</span></li>
-      <li><i style="background:var(--bad)"></i><span><b>Rosso:</b> SILENZIO! La combo si azzera e la pazienza della mascotte si consuma.</span></li>
-      <li><i style="background:var(--ink)"></i><span><b>Pazienza a zero:</b> richiamo. Se il rumore continua arrivano altri richiami, fino all’intervento del docente. Il silenzio la annulla.</span></li>
-      <li><i style="background:var(--violet)"></i><span><b>Premi e punizioni:</b> il silenzio sblocca pause e niente compiti, il casino porta compiti in più e verifiche. Si vincono e si perdono fino alla fine dell'ora.</span></li>
-    </ul>
-<p id="lesson-summary" class="lesson-summary" role="status" hidden></p>
-    <div class="start-row"><span class="label">Classe</span><div class="chips" data-chips></div></div>
-    <div class="start-actions">
-      <button class="btn primary" id="start-mic" type="button">Accendi il microfono</button>
-      <button class="btn" id="start-measure" type="button">Accendi e misura il silenzio (5 s)</button>
-      <button class="btn" id="start-demo" type="button">Guarda la simulazione</button>
+    <a class="start-brand" href="./" aria-label="Ronf, pagina iniziale"><img src="./assets/ronf-mark.svg" width="48" height="42" alt="">Ronf<span aria-hidden="true">.</span></a>
+    <img class="welcome-mascot" src="./assets/marmotta.svg" width="140" height="140" alt="La marmotta dorme tranquilla">
+    <ol class="setup-progress" aria-label="Preparazione della lezione" id="setup-progress">
+      <li data-progress="microphone"><span class="sr-only">Microfono</span></li><li data-progress="quiet"><span class="sr-only">Silenzio</span></li><li data-progress="class"><span class="sr-only">Classe</span></li>
+    </ol>
+    <div id="setup-content">
+      <h2 id="start-title" tabindex="-1">Microfono?</h2>
+      <section data-setup-step="microphone">
+        <p class="setup-description">L’audio resta sul tuo dispositivo.</p>
+        <button class="btn primary setup-main" id="setup-connect" type="button">Accendi il microfono</button>
+
+      </section>
+      <section data-setup-step="quiet" hidden>
+        <p class="setup-description">Cinque secondi. Tutti in silenzio.</p>
+        <div class="quiet-count" id="setup-count" hidden aria-hidden="true">5</div>
+        <p class="sr-only" id="setup-status" role="status" aria-live="polite"></p>
+        <button class="btn primary setup-main" id="setup-measure" type="button">Misura il silenzio</button>
+      </section>
+      <section data-setup-step="class" hidden>
+
+        <p class="setup-result" id="setup-result" hidden></p>
+        <div class="start-row"><span class="sr-only">Classe</span><div class="chips" data-chips></div></div>
+        <details class="new-class"><summary>Nuova classe</summary><label for="setup-class-name">Nome della classe</label><input id="setup-class-name" type="text" maxlength="24" placeholder="es. 2B" autocomplete="off"></details>
+        <button class="btn primary setup-main" id="setup-play" type="button">Si parte</button>
+      </section>
+      <section data-setup-step="quick" hidden>
+
+        <div class="start-row"><span class="sr-only">Classe</span><div class="chips" data-chips></div></div>
+        <button class="btn primary setup-main" id="start-mic" type="button">Accendi il microfono</button>
+      </section>
     </div>
     <p class="error" id="start-error" role="alert" hidden></p>
-    <p class="start-note"><span id="start-thresholds">Soglie: attenzione 60 dB, silenzio 70 dB, preavviso dopo 10 s.</span> <button class="linklike" id="start-settings" type="button">Cambia le impostazioni</button></p>
-    <p class="start-note privacy-note">Il microfono resta sul tuo dispositivo. Nessun audio registrato o inviato. Gratis, senza account.</p>
-    <div class="welcome-links"><button class="linklike" id="welcome-about" type="button">Come funziona e privacy</button><a href="https://github.com/akkaz/ronf" target="_blank" rel="noopener">Open source su GitHub ↗</a></div>
+    <div class="setup-bottom">
+      <button class="btn setup-secondary" id="setup-back" type="button" hidden>Indietro</button>
+      <button class="btn setup-secondary" id="setup-skip" type="button" hidden>Salta</button>
+      <button class="btn setup-secondary" id="start-demo" type="button">Prova senza microfono</button>
+      <button class="btn setup-secondary" id="setup-again" type="button" hidden>Rifai il setup</button>
+    </div>
+    <p id="lesson-summary" class="sr-only" role="status" hidden></p>
+    <span id="start-thresholds" hidden></span>
   </div>
 </div>
 
@@ -182,7 +200,7 @@
 <p><strong>Il microfono lavora sul tuo dispositivo.</strong> Ronf non registra né invia audio. I livelli sono stime del browser: regola le soglie nella tua aula. Non è un fonometro professionale.</p>
 <p>Classi, preferenze, XP e record restano in questo browser. Se cancelli i dati del sito li perdi: usa <strong>Esporta backup</strong> nelle impostazioni per conservarli o cambiare computer. Sullo stesso browser condiviso, gli altri utilizzatori possono vedere questi dati. Usa nomi di classe, senza nomi degli studenti.</p>
 <p>La simulazione permette di esplorare tutto senza microfono e non salva i punti. L’avviso al cambio dell’ora si può attivare nelle impostazioni.</p>
-<p>Creato da <a href="https://akkaz.dev" target="_blank" rel="noopener">Gio Marco Baglioni</a>, nato dall’esperienza in aula. <a href="https://github.com/akkaz/ronf" target="_blank" rel="noopener">Codice su GitHub · licenza MIT</a>.</p>
+<p>Creato da <a href="https://akkaz.dev" target="_blank" rel="noopener">akkaz</a>, nato dall’esperienza in aula. <a href="https://github.com/akkaz/ronf" target="_blank" rel="noopener">Codice su GitHub · licenza MIT</a>.</p>
 </div></dialog>
 
 <div class="calm-returned" id="relief" role="status" hidden>✓ Calma ritrovata · richiamo annullato</div>

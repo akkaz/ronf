@@ -122,6 +122,14 @@ test('pausa ferma XP, energia e avanzamento dei richiami',()=>{
   assert.equal(c.run('G.esc'),0);assert.equal(c.run('G.balance'),0);assert.equal(c.run('league[current].points'),0);
 });
 
+test('il wizard ascolta il microfono senza assegnare punti o consumare pazienza',()=>{
+  const c=make();c.run('setupActive=true;G.notaOpen=true;level=95;updateGame(5,10000);saveLeague()');
+  assert.equal(c.run('G.esc'),0);assert.equal(c.run('G.balance'),0);assert.equal(c.run('league[current].points'),0);
+  assert.equal(c.values['ronf:v1:league'],undefined);
+  c.run('G.notaOpen=false;level=40;updateGame(5,10000)');
+  assert.equal(c.run('G.streak'),0);assert.equal(c.run('G.session'),0);
+});
+
 test('selettori dello script e ID HTML coerenti', () => {
   const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);assert.equal(ids.length,new Set(ids).size);
   for(const m of source.matchAll(/\$\('#([\w-]+)'\)/g))assert.ok(ids.includes(m[1]),'ID mancante: '+m[1]);
