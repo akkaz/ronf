@@ -1,27 +1,22 @@
 ---
 name: Ronf
-description: "Una marmotta originale, una landing lime e un tabellone alpino leggibile dalla LIM."
+description: "Mascotte originali, lime e lettere grandi: dalla home al tabellone della classe."
 colors:
-  lime-landing: "#eaf17f"
-  ink-landing: "#173c32"
-  ink-landing-hover: "#2e5545"
-  cream-landing: "#fffdf3"
-  selection-landing: "#f4ad8b"
-  forest: "#233f38"
-  forest-board-hover: "#2f554b"
-  forest-start: "#315942"
-  paper-board: "#e7efe3"
-  text-board: "#1d2a2c"
-  muted-board: "#56656a"
-  line-board: "#d3dbd0"
+  lime: "#eaf17f"
+  ink: "#173c32"
+  ink-hover: "#2e5545"
+  cream: "#fffdf3"
+  selection: "#f4ad8b"
+  hand-underline: "#d47649"
+  muted: "#4b6252"
+  line: "#c9d2ae"
+  control-hover: "#edf1cf"
+  hud-border: "#b9c89e"
+  field-border: "#7e9468"
+  setup-secondary-hover: "#dce677"
+  setup-secondary-active: "#d0dd6d"
   white: "#ffffff"
-  surface-hud: "#f7faf6"
-  surface-welcome: "#f7faf2"
-  surface-score: "#f8f5ff"
-  score-ink: "#3e285d"
   night-board: "#1b2850"
-  violet-board: "#6d4aa3"
-  violet-focus: "#8154aa"
   xp-gold: "#f3d582"
   calm: "#2e8b57"
   calm-label: "#246c43"
@@ -36,7 +31,7 @@ typography:
     fontWeight: 900
     lineHeight: 0.99
     letterSpacing: "-0.04em"
-  brand-landing:
+  brand:
     fontFamily: "Outfit, sans-serif"
     fontSize: "2.3rem"
     fontWeight: 900
@@ -56,30 +51,42 @@ typography:
     fontFamily: "Caveat, sans-serif"
     fontSize: "4rem"
   welcome-title:
-    fontFamily: "Bungee, Atkinson Hyperlegible, sans-serif"
-    fontSize: "clamp(1.7rem, 3vw, 2.5rem)"
-    fontWeight: 400
-    lineHeight: 1.16
-    letterSpacing: "-0.025em"
+    fontFamily: "Outfit, sans-serif"
+    fontSize: "3rem"
+    fontWeight: 900
+    lineHeight: 1.04
+    letterSpacing: "-0.035em"
   body-board:
-    fontFamily: "Atkinson Hyperlegible, Arial, Helvetica, sans-serif"
+    fontFamily: "Outfit, sans-serif"
     fontSize: "1rem"
     lineHeight: 1.45
   label-board:
-    fontFamily: "Atkinson Hyperlegible, Arial, Helvetica, sans-serif"
+    fontFamily: "Outfit, sans-serif"
     fontSize: "1rem"
     fontWeight: 700
   readout:
-    fontFamily: "Bungee, Arial Black, Impact, sans-serif"
+    fontFamily: "Outfit, sans-serif"
     fontSize: "3.5rem"
+    fontWeight: 800
+    lineHeight: 1
+  setup-secondary:
+    fontFamily: "Outfit, sans-serif"
+    fontSize: "1rem"
+    fontWeight: 500
+    lineHeight: 1.3
+  quiet-count:
+    fontFamily: "Outfit, sans-serif"
+    fontSize: "5rem"
+    fontWeight: 800
     lineHeight: 1
 rounded:
   field-compact: "0.5rem"
-  control: "0.6rem"
+  field: "0.6rem"
+  control: "10px"
   hud: "0.8rem"
   panel: "1rem"
   dialog: "1.1rem"
-  action-landing: "10px"
+  setup-secondary: "12px"
   pill: "99px"
 spacing:
   xs: "0.4rem"
@@ -91,60 +98,88 @@ spacing:
   board-gap: "clamp(10px, 1vw, 20px)"
 components:
   button-landing:
-    backgroundColor: "{colors.ink-landing}"
-    textColor: "{colors.cream-landing}"
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.cream}"
     typography: "{typography.label-landing}"
-    rounded: "{rounded.action-landing}"
+    rounded: "{rounded.control}"
     padding: "0.9rem 1.25rem"
     height: "54px"
   button-landing-hover:
-    backgroundColor: "{colors.ink-landing-hover}"
+    backgroundColor: "{colors.ink-hover}"
   button-landing-secondary:
     backgroundColor: "transparent"
-    textColor: "{colors.ink-landing}"
+    textColor: "{colors.ink}"
     typography: "{typography.label-landing}"
-    rounded: "{rounded.action-landing}"
+    rounded: "{rounded.control}"
     padding: "0.9rem 1.25rem"
     height: "54px"
   button-landing-secondary-hover:
-    backgroundColor: "{colors.cream-landing}"
+    backgroundColor: "{colors.cream}"
   button-primary:
-    backgroundColor: "{colors.forest}"
-    textColor: "{colors.white}"
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.cream}"
     rounded: "{rounded.control}"
     padding: "0.42rem 0.85rem"
+    height: "40px"
   button-primary-hover:
-    backgroundColor: "{colors.forest-board-hover}"
+    backgroundColor: "{colors.ink-hover}"
   button-secondary:
-    backgroundColor: "{colors.white}"
-    textColor: "{colors.text-board}"
+    backgroundColor: "{colors.cream}"
+    textColor: "{colors.ink}"
     rounded: "{rounded.control}"
     padding: "0.42rem 0.85rem"
+    height: "40px"
+  button-secondary-hover:
+    backgroundColor: "{colors.control-hover}"
   button-danger:
-    backgroundColor: "{colors.white}"
+    backgroundColor: "{colors.cream}"
     rounded: "{rounded.control}"
     padding: "0.42rem 0.85rem"
+  button-setup:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.cream}"
+    rounded: "{rounded.control}"
+    padding: "0.9rem 1.3rem"
+    height: "54px"
+    width: "100%"
+  button-setup-secondary:
+    backgroundColor: "transparent"
+    textColor: "{colors.ink}"
+    typography: "{typography.setup-secondary}"
+    rounded: "{rounded.setup-secondary}"
+    padding: "0.65rem 1rem"
+    height: "44px"
+  button-setup-secondary-hover:
+    backgroundColor: "{colors.setup-secondary-hover}"
+  button-setup-secondary-active:
+    backgroundColor: "{colors.setup-secondary-active}"
   input-text:
     backgroundColor: "{colors.white}"
-    textColor: "{colors.text-board}"
-    rounded: "{rounded.control}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.field}"
     padding: "0.5rem 0.65rem"
+  input-new-class:
+    backgroundColor: "{colors.cream}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.control}"
+    padding: "0.65rem 0.8rem"
   chip-class:
-    backgroundColor: "{colors.white}"
-    textColor: "{colors.text-board}"
+    backgroundColor: "{colors.cream}"
+    textColor: "{colors.ink}"
     rounded: "{rounded.pill}"
     padding: "0.28rem 0.85rem"
   chip-class-selected:
-    backgroundColor: "{colors.forest}"
+    backgroundColor: "{colors.ink}"
     textColor: "{colors.white}"
   card-hud:
-    backgroundColor: "{colors.surface-hud}"
+    backgroundColor: "{colors.cream}"
     rounded: "{rounded.hud}"
     padding: "0.9rem 1rem"
-  card-welcome:
-    backgroundColor: "{colors.surface-welcome}"
-    rounded: "{rounded.panel}"
-    padding: "2.2rem 2.4rem 1.8rem"
+  setup-container:
+    backgroundColor: "transparent"
+    textColor: "{colors.ink}"
+    padding: "1.5rem"
+    width: "100%"
 ---
 
 # Design System: Ronf
@@ -153,147 +188,146 @@ components:
 
 **Creative North Star: "Il rifugio della marmotta"**
 
-La marmotta originale lega due registri di Ronf: un ingresso lime, grande e ironico, e un tabellone alpino con misure leggibili dalla LIM. La landing usa inchiostro verde scuro, lettere Outfit pesanti e una piccola annotazione Caveat; il gioco conserva carta chiara, verde bosco, cielo notturno e l’accoppiata Bungee/Atkinson.
+Ronf usa un unico vocabolario dalla home al gioco: lime, inchiostro verde scuro, crema e Outfit largo e pesante. Il tono è breve, ironico e da aula. Caveat rimane la piccola voce a penna accanto al personaggio; sul tabellone la scena alpina e le grandi misure mantengono il ruolo principale.
 
-Il personaggio resta identico fra le superfici. La sua faccia addormentata diventa anche il piccolo marchio della landing, senza ridisegnare la mascotte. La composizione cambia secondo l’uso: invito e apertura del gioco nella presentazione, scena e controlli operativi nel tabellone. Le scelte della singola pagina sono registrate in `.impeccable/surfaces/index-html.md` e `.impeccable/surfaces.md`.
+Le 17 mascotte sono quelle reali del gioco, con quattro pose ciascuna, senza ridisegnare gli asset originali. La faccia addormentata della marmotta identifica Ronf in tutte le testate. La composizione cambia secondo l’uso: invito nella home, una decisione per passaggio nell’avvio, scena e controlli operativi nel tabellone. Le scelte delle superfici sono registrate in `.impeccable/surfaces/index-html.md` e `.impeccable/surfaces.md`.
 
 **Key Characteristics:**
-- Marmotta originale come elemento riconoscibile comune.
-- Lime e inchiostro verde scuro per la landing, senza ombre o animazioni.
-- Outfit per titolo, marchio e testi della landing; Caveat per il solo «sssh.».
-- Paesaggio alpino, Bungee e Atkinson preservati nel gioco.
-- Viola circoscritto ai progressi, alla combo e al focus del gioco.
-- Stato comunicato con colore, testo e cambiamento della scena.
+- Lime, verde scuro e crema condivisi da home, avvio e gioco.
+- Outfit per marchio, titoli, testi e misure; Caveat per il solo «sssh.».
+- Mascotte originali e nome sincronizzato, sottolineato come a mano.
+- Movimento breve e giocoso, con pausa e movimento ridotto.
+- Preparazione essenziale, con una CTA e una riga secondaria pertinente.
+- Stato sonoro comunicato con colore, testo e cambiamento della scena.
 
-Rilevato dal codice il 28 ottobre 2026 dopo il redesign A1 approvato. Fonti della landing: `index.html`, `landing.css` e `assets/ronf-mark.svg`; per il gioco, cascata `board.css` → `lesson-board.css` → `ronf.css` ed elementi di `gioca.html`. La documentazione aggiorna la landing e conserva il sistema del gioco.
+Rilevato dal codice il 28 ottobre 2026 dopo gli aggiornamenti autorizzati del mondo A1. Fonti: `index.html`, `landing.css`, `entry.js`; cascata del gioco `board.css` → `lesson-board.css` → `ronf.css`, `gioca.html`, `app.js`, `setup-flow.js`, `game-data.js` e `mascot-frames.js`. Le dichiarazioni Bungee/Atkinson rimaste nei fogli ereditati non definiscono la tipografia corrente: prevale Outfit negli override finali.
 
 ## Colors
 
-La landing mette la marmotta su un campo lime uniforme; il tabellone mantiene bosco, carta e cielo blu. I colori di segnale e progressione del gioco conservano compiti distinti. I valori normativi sono nel frontmatter.
+Lime accoglie e orienta; verde scuro sostiene testi e azioni; crema ospita letture e controlli. Il paesaggio e i segnali del rumore conservano i loro colori semantici. I valori normativi sono nel frontmatter.
 
 ### Primary
-- **Inchiostro della landing** (`ink-landing`): titolo, testo, marchio, bordo dei pulsanti e riempimento dell’azione principale. `ink-landing-hover` è il suo stato hover.
-- **Bosco del gioco** (`forest`): bordi, selezioni e pulsanti principali del tabellone. `forest-board-hover` ne definisce l’hover; l’avvio del microfono usa `forest-start`.
+- **Inchiostro** (`ink`): testo, marchio, pulsanti principali, focus, combo e storico. Nel gioco corrisponde anche ai token CSS ereditati `--forest` e `--violet`, ora allineati allo stesso verde. `ink-hover` è l’hover del principale.
 
 ### Secondary
-- **Lime della landing** (`lime-landing`): unico fondo di testata, contenuto e footer, senza pannelli o paesaggio aggiunto.
-- **Notte alpina** (`night-board`): campo della scena e contrasto dietro la mascotte del gioco. Il tabellone passa fra notte, alba, giorno e allarme attraverso le sue sfumature illustrate.
-- **Viola dei progressi** (`violet-board`, `surface-score`, `score-ink`): combo e pannello del punteggio. `violet-focus` identifica il focus nel gioco.
+- **Lime** (`lime`): fondo della home e dell’avvio, testata del gioco e avanzamento di livello.
+- **Tratto a penna** (`hand-underline`): sottolineatura del nome della mascotte nella home.
+- **Notte alpina** (`night-board`): fondale della scena del gioco, che conserva notte, alba, giorno e allarme.
 - **Oro XP** (`xp-gold`): totale XP; non sostituisce i colori del livello sonoro.
 
 ### Tertiary
-- **Calma** (`calm`, `calm-label`): livello sonoro favorevole, barra e indicatore testuale. Il pill favorevole usa il verde più scuro per il testo bianco.
-- **Attenzione** (`warning`, `warning-paper`): avvicinamento alla soglia e stato intermedio; il pill usa testo scuro.
-- **Allarme** (`alert`, `alert-paper`): soglia superata e azioni distruttive. Il relativo stato cambia anche messaggio e scena.
+- **Calma** (`calm`, `calm-label`): barra e stato favorevole; la variante più scura sostiene il testo bianco del pill.
+- **Attenzione** (`warning`, `warning-paper`): avvicinamento alla soglia e fondo intermedio.
+- **Allarme** (`alert`, `alert-paper`): soglia superata, fondo di allarme e azioni distruttive.
 
 ### Neutral
-- **Crema della landing** (`cream-landing`): testo del pulsante pieno e fondo hover del secondario.
-- **Pesca della selezione** (`selection-landing`): evidenziazione del testo selezionato nella landing, con inchiostro verde scuro.
-- **Carta del tabellone** (`paper-board`): fondo del gioco in calma; cambia tonalità con lo stato sonoro.
-- **Bianco e carte funzionali** (`white`, `surface-hud`, `surface-welcome`): controlli, misure e avvio del gioco.
-- **Inchiostro del tabellone** (`text-board`): testo corrente del gioco.
-- **Testo secondario e righe del gioco** (`muted-board`, `line-board`): spiegazioni, separatori e bordi discreti.
+- **Crema** (`cream`): fondo del gioco in calma, pannelli di misura e punteggio, controlli e testo del pulsante pieno.
+- **Bianco** (`white`): campi ereditati e alcuni contenitori del percorso della lezione.
+- **Verde secondario** (`muted`): spiegazioni e testi meno prominenti.
+- **Righe e bordi** (`line`, `hud-border`, `field-border`): separatori, misure e campi.
+- **Feedback dei controlli** (`control-hover`, `setup-secondary-hover`, `setup-secondary-active`): superfici di risposta a hover e pressione.
+- **Pesca della selezione** (`selection`): testo selezionato, con inchiostro verde scuro.
 
 **The State Has Words Rule.** Ogni stato sonoro conserva un nome leggibile e un riscontro nella scena; il colore da solo non comunica il significato.
 
 ## Typography
 
-**Landing:** Outfit variabile, con fallback sans-serif, per marchio, titolo, testi e azioni. Caveat variabile, con fallback sans-serif, compare solo nell’annotazione «sssh.».
-**Gioco:** Bungee per identità, titoli e grandi numeri; Atkinson Hyperlegible per leggere e agire, nei pesi regolare e grassetto.
+**Font principale:** Outfit variabile, con fallback sans-serif, in home, wizard, tabellone e dialoghi.
+**Annotazione:** Caveat variabile, con fallback sans-serif, solo per «sssh.» nella home.
 
-Il titolo della landing è largo, pesante e serrato; il gioco mantiene forme aperte e gerarchie leggibili da lontano. Tutti i font sono distribuiti dal sito, senza richieste a servizi di font esterni.
+Titoli e marchi sono larghi, pesanti e serrati; testi e controlli restano brevi e leggibili. I grandi numeri del gioco usano peso (800) e numeri tabulari dove previsto. I font sono locali.
 
 ### Hierarchy
-- **Display** (`display`): titolo della landing, peso (900), massimo (13ch), con interlinea quasi compatta. Entro (700px) usa `clamp(2.8rem, 11.4vw, 4.5rem)`. L’emoji 🤫 è parte del titolo esplicitamente scelto dall’autore e ha nome accessibile; non è un’icona generica dei controlli.
-- **Marchio** (`brand-landing`): Ronf in Outfit, accanto al volto originale addormentato. Entro (700px) il nome scende a (1.8rem).
-- **Body della landing** (`body-landing`): descrizione in due blocchi, larga al massimo (35ch). Entro (700px) passa a (1.06rem) e (34ch).
-- **Label della landing** (`label-landing`): le due azioni condividono peso, dimensione e interlinea. Gratuità e firma hanno scala più discreta.
-- **Annotazione** (`annotation-landing`): «sssh.» in Caveat, inclinato staticamente di (9deg). Sotto (900px) usa (3rem).
-- **Titolo di avvio** (`welcome-title`): Bungee sulla carta di ingresso al gioco.
-- **Body del gioco** (`body-board`): interfaccia operativa e dialoghi. I testi lunghi arrivano a circa (68ch).
-- **Label del gioco** (`label-board`): etichette di misure e punteggi sul tabellone. Le etichette secondarie possono essere più piccole, ma non sostituiscono quelle principali.
-- **Readout** (`readout`): livello sonoro nel pannello. I grandi numeri della combo e del punteggio hanno scala propria e numeri tabulari.
+- **Display** (`display`): payoff della home, massimo (13ch). Entro (700px) usa `clamp(2.8rem, 11.4vw, 4.5rem)`. L’emoji 🤫 appartiene al titolo scelto dall’autore e conserva un nome accessibile.
+- **Marchio** (`brand`): nome Ronf e volto originale; nella home scende a (1.8rem) entro (700px), nell’avvio a (2rem) entro (620px). La testata operativa usa (2rem).
+- **Body della home** (`body-landing`): spiegazione in due blocchi, massimo (35ch); sul telefono (1.06rem) e (34ch).
+- **Azioni della home** (`label-landing`): stessa gerarchia per Apri Ronf e GitHub.
+- **Annotazione** (`annotation-landing`): inclinazione statica di (9deg), dimensione (3rem) entro (900px).
+- **Titolo di avvio** (`welcome-title`): domanda breve, peso (900); entro (620px) usa (2.7rem). La descrizione finale usa (1.1rem), ridotta a (1.05rem) sul telefono.
+- **Body e label del gioco** (`body-board`, `label-board`): interfaccia e dialoghi. I testi lunghi arrivano a circa (68ch).
+- **Readout** (`readout`): livello sonoro; il telefono usa la scala compatta della scena. Combo, pazienza e punteggio mantengono scale proprie.
+- **Secondario di avvio** (`setup-secondary`): peso più leggero della CTA e nessuna sottolineatura.
+- **Conto alla rovescia** (`quiet-count`): grande numero durante la misura; il relativo stato è annunciato anche alle tecnologie assistive.
 
 **The Room First Rule.** Sul tabellone conservare la gerarchia fra numero grande, nome della misura e spiegazione secondaria: deve funzionare per chi guarda dalla classe.
 
 ## Layout
 
-La landing ha un contenitore largo al massimo (1440px), alto almeno `100svh`, con margini interni orizzontali di (5vw). Testata e footer delimitano un’area principale flessibile: la griglia a due colonne, nel rapporto (1.3fr / 1fr), centra verticalmente testo e mascotte nello spazio disponibile. Il gap è (3rem), ridotto a (1rem) entro (900px). La marmotta riempie la sua colonna mantenendo il rapporto originale; non è confinata in una carta.
+La home mantiene il contenitore massimo di (1440px), alto almeno `100svh`, con margini interni di (5vw). Testata e footer delimitano l’area principale flessibile: griglia (1.3fr / 1fr) centrata verticalmente, gap (3rem) e (1rem) entro (900px). Il personaggio occupa una scena quadrata nella colonna destra; il nome sincronizzato rimane nel titolo a sinistra.
 
-Entro (700px) la landing usa una colonna con margini di (6vw), testo e azioni prima della mascotte, gap di (2rem) e scorrimento naturale. La figura arriva a un massimo di (310px), allineata a destra. Le azioni possono andare a capo; il gruppo è largo al massimo (360px), con gap di (.75rem) e base flessibile di (150px) per pulsante. Il footer passa a una griglia verticale.
+Entro (700px) la home usa una colonna con margini di (6vw), testo e azioni prima della mascotte, gap (2rem) e scorrimento naturale. La figura è larga al massimo (310px), allineata a destra. Le azioni possono andare a capo nel gruppo massimo di (360px), con gap (.75rem) e base flessibile (150px). Il footer diventa verticale.
 
-Il tabellone usa un rem che cresce con lo schermo (`clamp(14px, calc(.62vw + .55vh), 26px)`) e `board-gap` fra le regioni. La scena contiene mascotte al centro, livello/XP in alto a sinistra, misure a destra, punteggio e combo in basso. Storico ed energia della lezione occupano la regione inferiore. Con larghezza oltre (1100px) e altezza da (700px), l’app usa l’altezza del viewport; sotto (1100px) scorre verticalmente.
+L’avvio occupa il campo lime ed è centrato, con contenitore trasparente largo al massimo (34rem) e padding finale (1.5rem). Entro (620px) il padding diventa (1.1rem .65rem). Marchio e piccola marmotta precedono tre punti di avanzamento; seguono titolo, contenuto del solo passaggio attivo, CTA a tutta larghezza e una riga secondaria. Gli accessi rapidi nascondono i punti di avanzamento.
 
-Sul telefono, entro (620px), il gioco mantiene una scena alta e dispone le due misure affiancate sopra al punteggio. L’ultimo override in `ronf.css` porta la scena a un minimo di (49rem) e la toolbar a una griglia di due colonne, con l’ultimo pulsante esteso su entrambe. I testi dei pulsanti possono andare a capo. La schermata di avvio impila i comandi a tutta larghezza. Le regole finali prevalgono sulle toolbar precedenti nei fogli ereditati.
+Il tabellone conserva il rem fluido `clamp(14px, calc(.62vw + .55vh), 26px)` e `board-gap`. La scena contiene mascotte centrale, livello/XP in alto a sinistra, misure a destra e combo/punteggio in basso; storico ed energia occupano la regione inferiore. Oltre (1100px) e da (700px) di altezza, l’app usa l’altezza del viewport; sotto scorre verticalmente. Entro (620px) la scena ha minimo (49rem), misure affiancate e toolbar a due colonne con l’ultima azione estesa su entrambe.
 
 ## Elevation & Depth
 
-La landing è piatta: campo lime, testo, pulsanti e mascotte senza ombre CSS, carte o effetti di profondità aggiunti. L’ombra illustrata appartiene al file originale della marmotta. Nessuna animazione o transizione è definita nella landing; gli hover cambiano direttamente il colore.
-
-Il tabellone usa soprattutto campi di colore, bordi e livelli della scena. La scena corrente non ha ombra. Le ombre funzionali emergono su dialoghi, avvio e promemoria.
+Home e wizard sono piatti: fondo lime, personaggi, testo e azioni senza carte o ombre aggiunte. L’ombra illustrata appartiene agli asset originali. Il tabellone usa campi di colore, bordi e livelli del paesaggio; la scena non ha ombra. I dialoghi e i promemoria conservano elevazione funzionale.
 
 ### Shadow Vocabulary
-- **Avvio:** `0 12px 46px rgba(10,27,24,.26)`; stacca la carta dal fondale scuro.
-- **Dialogo:** `8px 8px 0 var(--forest)`; ombra netta già usata nelle impostazioni.
-- **Cambio ora:** `0 8px 32px rgba(10,27,24,.25)`; eleva il promemoria.
-- **Premio raggiunto:** `0 3px 0 #aa7218`; rende tattile la medaglia attivata.
+- **Dialogo:** `0 12px 46px rgba(10,27,24,.22)`; override corrente dei dialoghi operativi.
+- **Cambio ora:** `0 8px 32px rgba(10,27,24,.25)`; promemoria.
+- **Premio raggiunto:** `0 3px 0 #aa7218`; medaglia attivata.
+
+Il movimento accompagna il cambio di personaggio, l’ingresso nel gioco, i passaggi del wizard e gli stati della scena. Le durate esatte sono nel sidecar. `prefers-reduced-motion` impedisce la rotazione automatica e salta le transizioni di ingresso e del wizard, oltre a disattivare le animazioni del gioco.
 
 ## Shapes
 
-I pulsanti della landing hanno angoli morbidi (`action-landing`) e bordo continuo di (1.5px). Il marchio riprende il volto della mascotte senza un contenitore aggiunto; la figura grande conserva tutta la sagoma originale.
+Marchio e personaggi mantengono sagome originali, senza contenitori illustrati aggiunti. Il nome variabile della home riceve un tratto sottile, curvo e inclinato di (-1.5deg), nel colore dedicato.
 
-Nel gioco le carte principali hanno angoli morbidi, con pannelli e avvio a `panel` e misure a `hud`. I controlli usano `control`; i selettori compatti usano `field-compact`. Chip di classe, pill di stato e barre di progressione hanno estremità rotonde. Il tabellone mantiene un rettangolo arrotondato delimitato da un bordo bosco di (2px). Medaglie circolari e stemma a scudo identificano premi e livello.
+Pulsanti ordinari e selettore di classe condividono `control`; le azioni secondarie del wizard usano `setup-secondary`. Misure e punteggio conservano `hud`, pannelli e scena `panel`, dialoghi `dialog`. Chip e barre mantengono estremità rotonde. I punti dell’avanzamento sono cerchi di (9px), vuoti o pieni secondo `aria-current`.
 
 ## Components
 
 ### Buttons
 
-Azioni della landing affiancate e comandi del gioco chiaramente distinguibili.
-
-- **Apri Ronf:** `button-landing`, altezza minima (54px), fondo inchiostro e testo crema, con freccia SVG. Apre `gioca.html` nella stessa scheda. Hover con il verde dedicato, senza movimento.
-- **GitHub:** `button-landing-secondary`, stessa altezza e tipografia, fondo trasparente e bordo inchiostro. Icona GitHub originale e nome visibile; hover crema. Apre il repository pubblico in una nuova scheda.
-- **Gioco:** `button-primary` e `button-secondary`, bordo bosco di (1.5px), testo (.9rem). Hover con cambio di fondo; pressione con spostamento di (1px). L’avvio usa controlli più alti e il verde `forest-start` per il microfono.
-- **Azioni distruttive:** bordo rosso e testo rosso scuro; la variante armata diventa rossa con testo bianco. Non usarla per le azioni quotidiane.
-- **Focus:** contorno visibile di (3px); nella landing usa il colore corrente e offset di (6px), nel gioco viola e offset di (3px). Lo skip link della landing compare al focus e porta all’azione principale.
-- **Disabilitato nel gioco:** opacità (.55) e cursore normale.
+- **Home:** Apri Ronf pieno e GitHub outline, altezza minima (54px), bordo (1.5px) e icone originali. Il principale apre il gioco mantenendo il documento genitore; l’URL resta condivisibile. GitHub apre il codice in un’altra scheda.
+- **Gioco:** principali verdi e secondari crema, raggio `control`, altezza minima base (40px), testo `max(.95rem, 12px)`. La toolbar mobile mantiene i propri override compatti. Hover cromatico e pressione di (1px).
+- **Wizard:** principale pieno a tutta larghezza, altezza minima (54px). Sotto, solo i secondari pertinenti in una riga outline, altezza minima (44px), bordo (1px), raggio `setup-secondary`, nessuna sottolineatura. Hover e pressione usano i colori dedicati.
+- **Distruttivo:** bordo rosso e testo rosso scuro; la variante armata è piena rossa con testo bianco.
+- **Focus:** contorno verde visibile di (3px), offset (6px) nella home e (3px) nel gioco. Lo skip link della home compare al focus. Disabilitato: opacità (.55) e cursore normale.
 
 ### Chips
 
-La classe è un pill con bordo bosco, fondo bianco e nome in grassetto. La selezione riempie il pill di bosco con testo bianco e conserva `aria-pressed`. Il chip della simulazione ha bordo viola tratteggiato: deve restare riconoscibile come modalità distinta.
+La classe usa pill crema, bordo e testo verde; la selezione è verde piena con testo bianco e `aria-pressed`. Il chip demo conserva il bordo tratteggiato, ora verde, e si distingue dalla modalità microfono.
 
 ### Cards / Containers
 
-Le misure del gioco appaiono su carta `surface-hud`, con bordo verde tenue di (1px), angoli `hud` e spazio interno di `card-hud`. Il punteggio usa `surface-score` e testo viola scuro, separando i due gruppi con una linea. Il contenitore di avvio usa `surface-welcome` e la relativa ombra. Lo storico ha fondo bosco scuro e testo chiaro; i premi rimangono su fondo bianco.
+Le misure e il punteggio sono crema con bordo `hud-border`, angoli `hud` e separatori `line`. Lo storico è verde scuro con testo chiaro. Il wizard è un contenitore trasparente sul lime, senza ombra o carta sovrapposta. I dialoghi mantengono la loro superficie crema.
 
 ### Inputs / Fields
 
-Campo bianco, bordo verde grigio di (1.5px), angoli `control`, etichetta in grassetto e spazio verticale di (.4rem). Il textarea ha angoli `field-compact` e bordo di (1px). Range e checkbox usano il bosco; i range mostrano il valore con un output testuale. Focus viola condiviso con i pulsanti.
+I campi ereditati mantengono bordo verde grigio e raggio `field`. Il campo Nuova classe usa fondo crema, bordo `field-border`, raggio `control`, etichetta e placeholder leggibili. Il selettore di classe del wizard è largo quanto la riga e alto almeno (48px). Range e checkbox usano il verde; i range conservano un output testuale. Il focus è condiviso con i pulsanti.
 
 ### Navigation
 
-La testata della landing contiene il volto addormentato originale e il nome Ronf in Outfit con il punto finale. Il volto misura (48 × 42px), ridotti a (40 × 35px) su telefono. Le azioni sono nel contenuto principale; il footer conserva la firma «akkaz» e la nota sull’audio. La testata del gioco mantiene il suo marchio Bungee e i comandi operativi raggruppati.
+Home, avvio e gioco mostrano il volto addormentato della marmotta e Ronf in Outfit con punto finale. L’ingresso mantiene una sola istanza del gioco in un iframe della stessa origine: apertura, caricamento e ritorno sono animati, l’URL usa la History API e il tasto indietro riporta alla home. Il collegamento diretto a `gioca.html` resta valido. Nel gioco impostazioni e spiegazioni appartengono alla toolbar.
 
-### Mascot and board
+### Mascots and setup
 
-La landing mostra `assets/marmotta.svg` intera e statica; `assets/ronf-mark.svg` ne estrae il volto mantenendo forme e colori originali. Il gioco conserva mascotte e paesaggio: notte, alba, giorno e allarme descrivono i suoi stati. Energia della lezione e XP restano visivamente distinti, con una combo circolare e grandi letture numeriche.
+La home presenta le 17 mascotte di `MASCOT_CATALOG`: una posa circa ogni secondo, quattro pose prima del personaggio successivo. Nome e personaggio cambiano insieme; il nome mantiene il tratto a mano. Hover sul personaggio sospende la rotazione; il comando di pausa compare al focus da tastiera. Nessun comando visibile per cambiare manualmente animale. Con movimento ridotto la scena resta statica. Durante il gioco aperto o con documento nascosto la rotazione non avanza.
 
-Le animazioni del gioco descrivono respiro, cambi di stato e traguardi. `prefers-reduced-motion` elimina animazioni e transizioni del gioco.
+Gli sprite riusano le immagini originali: ogni posa ha la propria finestra alpha in `mascot-frames.js`, condivisa da home e gioco, per escludere frammenti delle righe adiacenti. La marmotta SVG conserva le pose originali. Non trasformare queste finestre in nuovi asset o ridisegni.
+
+L’avvio segue microfono → silenzio facoltativo di cinque secondi → classe; gli accessi successivi usano il passo rapido. Ogni passo mostra una CTA e solo la riga secondaria pertinente: microfono «Prova senza microfono»; silenzio «Indietro» e «Salta»; classe «Indietro»; rapido «Rifai il setup». Durante la misura i secondari sono nascosti. Nessun riepilogo soglie visibile e nessuna pila di opzioni nel wizard. Le impostazioni restano nella toolbar. Preparazione, passaggi e avvio non ricaricano il gioco; XP, energia e pazienza restano sospesi finché non si parte.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** conservare la marmotta originale e usare il suo volto originale per il marchio della landing.
-- **Do** usare Outfit e Caveat nella landing e conservare paesaggio alpino e accoppiata Bungee/Atkinson nel gioco.
-- **Do** mantenere la landing piatta e statica, con lime, inchiostro verde scuro e crema nei ruoli documentati.
-- **Do** usare il bosco per azioni e controlli del gioco, mantenendo il viola legato a progressi e focus.
+- **Do** usare palette, marchio e Outfit condivisi da home, avvio e gioco.
+- **Do** riusare le mascotte originali e le finestre alpha specifiche di ogni posa.
+- **Do** mantenere sincronizzati nome e personaggio, con il tratto a mano sul nome.
+- **Do** offrire pausa, focus visibile e rispetto del movimento ridotto.
+- **Do** conservare una CTA e una sola riga secondaria pertinente per passo del wizard.
 - **Do** accompagnare i colori di stato con testo leggibile e segnali della scena.
-- **Do** verificare la cascata finale prima di riusare una regola dei fogli ereditati.
-- **Do** mantenere focus visibile, etichette dei campi e rispetto del movimento ridotto.
+- **Do** verificare la cascata finale prima di riusare regole dei fogli ereditati.
 
 ### Don't:
-- **Don't** ridisegnare la marmotta o sostituire il volto del marchio con un animale diverso.
+- **Don't** introdurre reinterpretazioni delle mascotte o cambiare il volto del marchio.
+- **Don't** ripristinare Bungee/Atkinson, i vecchi accenti viola o la vecchia carta di avvio come sistema corrente.
+- **Don't** aggiungere controlli visibili per il cambio manuale delle mascotte nella home.
+- **Don't** sottolineare i secondari del wizard o aggiungere riepiloghi soglie e pile di link.
 - **Don't** ridurre le misure principali alla scala dei testi secondari.
 - **Don't** confondere l’energia della lezione con gli XP cumulativi.
-- **Don't** sovrapporre didascalie chiare al paesaggio senza il fondo notturno pieno.
-- **Don't** ripristinare le vecchie ombre del palco o le vecchie toolbar ignorando gli override correnti.
 - **Don't** richiedere font, icone o immagini da servizi esterni per riprodurre questo sistema.
