@@ -1,0 +1,14 @@
+{
+  "name": "ronf",
+  "version": "1.0.0",
+  "description": "Fate squadra. Non svegliate la marmotta. Un gioco cooperativo per il rumore in aula.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {"node": ">=22.13"},
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "start": "node scripts/serve.mjs",
+    "test": "node --test tests/*.test.mjs"
+  }
+}

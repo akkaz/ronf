@@ -1,0 +1,65 @@
+/* Classroom board: character + game HUD above, lesson evidence + consequences below. */
+.board{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(26rem,1fr) auto;grid-template-areas:'stage' 'outcome';min-height:0}
+.stage{min-height:26rem;box-shadow:none;isolation:isolate}
+.stage .marmot-wrap{left:46%;bottom:7.2rem;height:66%;max-width:45%;aspect-ratio:1;z-index:1}
+.stage .range{bottom:0;height:42%}
+.stage .mascot-rank{inset:1.2rem auto auto 1.2rem;width:24%;gap:.8rem;align-items:start;pointer-events:auto}
+.stage .level-emblem{width:4.5rem;height:5.3rem}.stage .level-emblem strong{font-size:2.7rem}
+.stage .rank-copy{max-width:none;flex:1;padding-top:.1rem}.stage .rank-copy>strong{font-size:1.3rem;line-height:1.15}
+.stage .rank-copy>span{font-size:.85rem;line-height:1.2}.stage .rank-progress{margin-top:.55rem;height:.5rem}
+.stage .points-row .label{color:#e1d9f3;font-size:.8rem}.stage .points-row{margin-top:.5rem}
+.stage .xp-total{display:flex;gap:.3rem;align-items:baseline;font-size:1.7rem;color:#f3d582;line-height:1.15;font-weight:700;margin-top:.15rem}
+.stage .xp-total small{font-size:.8rem}.stage .points .sub{font-size:.8rem;color:#e1d9f3;margin-top:.15rem}
+.stage[data-mood=stir] .mascot-rank,.stage[data-mood=grumpy] .mascot-rank{color:#2b352e}
+.stage[data-mood=stir] .rank-copy>span,.stage[data-mood=grumpy] .rank-copy>span,.stage[data-mood=stir] .points .sub,.stage[data-mood=grumpy] .points .sub,.stage[data-mood=stir] .points-row .label,.stage[data-mood=grumpy] .points-row .label{color:#37482e}
+.stage[data-mood=stir] .xp-total,.stage[data-mood=grumpy] .xp-total{color:#503473}
+.stage .bubble{top:1.2rem;right:28%;max-width:36%;text-align:center}.stage .bubble strong{font-size:1.7rem}
+.stage .stage-chip{bottom:8.2rem;left:46%;right:auto;width:max-content;max-width:45%;transform:translateX(-50%);border-radius:99px;padding:.3rem .8rem;font-size:.9rem;z-index:3}
+.stage .readout,.stage .patience{position:absolute;right:1rem;width:23%;z-index:3;background:#f7faf6;border:1px solid #aabfb0;border-radius:.8rem;padding:.9rem 1rem;grid-area:auto}
+.stage .readout{top:1rem}.stage .readout-head{flex-wrap:wrap;gap:.4rem}.stage .readout .label,.stage .patience .label{font-size:1rem;color:#365544}
+.stage .readout-main{display:flex;flex-direction:column;align-items:stretch;gap:.6rem;margin-top:.35rem;min-height:0}
+.stage .db-box{width:100%;height:auto;container-type:normal}.stage .db-value{font-size:3.5rem;line-height:1}.stage .db-unit{font-size:1rem}
+.stage .readout .meter{width:100%;margin:0}.stage .meter-track{height:1rem;min-height:1rem}.stage .meter-marks{font-size:.7rem;gap:.5rem;line-height:1.15;margin-top:.4rem}
+.stage .zone-pill{font-size:.8rem}.stage .patience{bottom:1rem}.stage .patience-head{align-items:center;gap:.4rem;flex-wrap:wrap}
+.stage .pat-pill{font-size:.75rem;padding:.2rem .5rem}.stage .patience-main{grid-template-columns:auto minmax(0,1fr);gap:.65rem;margin-top:.65rem}
+.stage .pat-secs{font-size:2.6rem;line-height:1}.stage .pat-secs small{font-size:.9rem;margin-left:.2rem}.stage .pat-bar{height:1rem;border:1px solid #b4c9b8}
+.stage .pat-rule{font-size:.7rem;line-height:1.1;margin-top:.4rem;flex-wrap:wrap;gap:.2rem}.stage .pat-rule>span:nth-child(2){display:none}
+.stage .score{position:absolute;inset:auto 26% 1rem 1rem;z-index:3;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:1rem;align-items:center;background:#f8f5ff;border:1px solid #cbbbdc;border-radius:.8rem;padding:.75rem 1rem;grid-area:auto}
+.stage .score .stat{padding:0;min-width:0}.stage .score .stat+.stat{border-left:1px solid #d6c9e4;padding-left:1.1rem}.stage .score .label{font-size:1rem;color:#4e3671}
+.stage .score .stat .big{font-size:2.8rem;line-height:1.05;margin:.2rem 0;color:#3e285d;font-variant-numeric:tabular-nums}
+.stage .score .stat:first-child>.sub{position:static;width:auto;height:auto;clip-path:none;overflow:visible;font-size:.8rem;color:#584571}
+.stage #record-author{display:none}.stage .score .combo{display:grid;grid-template-columns:4.8rem minmax(0,1fr);grid-template-rows:auto auto auto;column-gap:.8rem;position:relative;align-items:center}
+.stage .combo>.label{grid-column:2;grid-row:1}.stage .combo-dial{position:relative;width:4.8rem;height:4.8rem;grid-column:1;grid-row:1/4}
+.combo-dial svg{position:absolute;inset:0;width:100%;height:100%;fill:none;stroke-width:7;transform:rotate(-90deg)}
+.combo-ring-track{stroke:#e3d8ed}#combo-ring-fill{stroke:#72489b;stroke-dasharray:100;stroke-dashoffset:100;stroke-linecap:round;transition:stroke-dashoffset .3s ease-out}
+.stage .score .combo-dial .big{position:absolute;inset:0;display:grid;place-items:center;margin:0;font-size:2.1rem;color:#69438f}
+.stage .combo .combo-rate{grid-column:2;grid-row:2;font-size:.95rem}.stage .combo .sub{grid-column:2;grid-row:3;font-size:.8rem;line-height:1.1}
+.stage .combo .combo-meter{display:none}.stage .combo-help{top:0;right:0;width:1.5rem;height:1.5rem;font-size:.85rem}
+.stage[data-warning=true] .mascot-rank{visibility:visible}.stage .warning-dock{inset:1rem 26% 8rem 27%;border-radius:.8rem;padding:.8rem 1rem;gap:.45rem;z-index:4}
+.stage .warning-symbol{display:none}.stage .warning-message{margin-block:auto;gap:.5rem}.stage .warning-message h2{font-size:1.4rem}.stage .warning-message p{font-size:.9rem;line-height:1.2}.stage .warning-top{font-size:.75rem}.stage .warning-steps{font-size:.65rem}.stage .warning-recovery{padding:.5rem}.stage .warning-recovery>p:first-child{font-size:.85rem}.stage .warning-bottom{font-size:.7rem}.stage .recovery-label{font-size:.65rem}
+#open-ranking{background:#fff2c5;border-color:#bc9131;gap:.55rem;white-space:nowrap}#open-ranking .race-trophy{font-size:1.25rem}#race-rank{font-size:1.2rem}#race-target{font-size:.75rem;line-height:1.15;max-width:13rem;white-space:normal}
+.lesson-outcome{grid-area:outcome;display:grid;grid-template-columns:minmax(17rem,.32fr) minmax(0,1fr);gap:var(--gap);min-width:0}
+.lesson-outcome .session-history{position:relative;inset:auto;height:auto;min-height:15rem;z-index:auto;display:flex;flex-direction:column;border:2px solid var(--forest);border-radius:1rem;padding:.8rem 1rem;color:#eff9f1}
+.session-history .history-heading{display:block}.session-history .history-heading h2{font-size:1.1rem;line-height:1.1;margin:0}.session-history .history-heading>span{font-size:.85rem;display:block;margin-top:.4rem}
+.lesson-outcome #lesson-chart{flex:1;min-height:7.5rem;height:8rem;margin:.4rem 0}.history-link{font-size:.75rem;line-height:1.2;color:#def2df;margin-top:.4rem;white-space:nowrap}
+.lesson-outcome .history-empty{inset:45% .8rem auto;font-size:.8rem;line-height:1.3}.lesson-outcome .journey{grid-area:auto;padding:.85rem 1rem;min-width:0;gap:.4rem}
+.lesson-outcome .journey-heading{gap:.75rem}.lesson-outcome .energy-hud{gap:.5rem}.lesson-outcome .energy-hud h2{font-size:1rem}.lesson-outcome .bal{font-size:2.7rem}.lesson-outcome .lesson-label{font-size:.7rem}.lesson-outcome .energy-max{font-size:.8rem}
+.goal-icon{display:grid;place-items:center;width:3rem;height:3rem;flex:none;border-radius:.65rem;background:#fff1c2;color:#6d4b08}.goal-icon .perk-icon{width:1.9rem;height:1.9rem}.goal-icon[data-kind=punish]{background:#f9e4dc;color:#943624}
+.lesson-outcome .journey-goal h2{font-size:.8rem}.lesson-outcome .rewards-sum{font-size:1.2rem}.lesson-outcome .journey-totals{display:none}.lesson-outcome .journey-controls{margin-left:auto}
+.lesson-outcome .journey-legend{font-size:.8rem;margin-top:0}.lesson-outcome .journey-stops{gap:.35rem}.lesson-outcome .perk-medal,.lesson-outcome .home-medal{width:3.6rem;height:3.6rem}.lesson-outcome .perk-icon{width:1.9rem;height:1.9rem}
+.lesson-outcome .perk-name{font-size:1rem;min-height:2.24em;line-height:1.12}.lesson-outcome .perk-at{font-size:.85rem}.lesson-outcome .journey-home strong{font-size:.85rem}.lesson-outcome .journey-home>span:last-child{font-size:.85rem}.lesson-outcome .route-meter{top:3.3rem}.lesson-outcome .journey-cursor span{font-size:.75rem}
+.stage[data-reaction] .marmot-wrap{animation:mascot-achievement .7s ease-out}.stage[data-reaction=milestone] .level-emblem{animation:level-achievement .7s ease-out}
+@keyframes mascot-achievement{0%,100%{transform:translateX(-50%) scale(1)}40%{transform:translate(-50%,-.6rem) scale(1.025)}}
+@keyframes level-achievement{0%,100%{filter:brightness(1)}40%{filter:brightness(1.3)}}
+@media(min-width:1101px) and (min-height:700px){.app{height:100dvh}.board{grid-template-rows:minmax(0,1fr) auto}.stage{min-height:23rem}}
+@media(min-width:1600px){.lesson-outcome .perk-medal,.lesson-outcome .home-medal{width:4.5rem;height:4.5rem}.lesson-outcome .perk-name{font-size:1.15rem}.lesson-outcome .route-meter{top:3.75rem}.lesson-outcome .perk-icon{width:2.25rem;height:2.25rem}.lesson-outcome .session-history{min-height:16rem}}
+@media(max-width:1100px){.app{height:auto}.board{grid-template-rows:auto auto;grid-template-areas:'stage' 'outcome';grid-template-columns:minmax(0,1fr)}.stage{min-height:32rem}.lesson-outcome{grid-template-columns:minmax(0,1fr)}.lesson-outcome .session-history{min-height:11rem}.lesson-outcome #lesson-chart{height:7rem}.stage .mascot-rank{width:30%;inset:1rem auto auto 1rem}.stage .level-emblem{width:3.8rem;height:4.6rem}.stage .rank-copy>strong{font-size:1.2rem}.stage .readout,.stage .patience{width:25%}.stage .marmot-wrap{left:46%;height:57%;bottom:8.5rem}.stage .score{right:29%}.stage .warning-dock{left:32%;right:29%;bottom:9rem}.stage .warning-steps{display:none}.stage .warning-message h2{font-size:1.15rem}.stage .bubble{right:30%;max-width:32%;top:2rem}.stage .bubble strong{font-size:1.3rem}}
+@media(max-width:620px){.board{padding-inline:12px}.top{padding-inline:12px}.top .app-name,.top-classes,.top .account-btn{display:none}.top .actions{margin-left:auto}.top #race-target{display:none}.top .btn{min-height:40px}.top kbd{display:none}.stage{min-height:47rem}.stage .mascot-rank{inset:1rem 1rem auto;width:auto;max-width:none;gap:.75rem}.stage .rank-copy{max-width:65%}.stage .bubble{top:9rem;right:1rem;max-width:35%}.stage .marmot-wrap{left:50%;bottom:15.5rem;max-width:90%;height:20rem}.stage .readout,.stage .patience{width:calc(50% - 1.5rem);top:auto;bottom:6.8rem;padding:.65rem}.stage .readout{left:1rem;right:auto}.stage .patience{right:1rem;min-height:7rem}.stage .db-value{font-size:2.4rem}.stage .meter-marks{font-size:.6rem}.stage .zone-pill{font-size:.65rem}.stage .readout .label,.stage .patience .label{font-size:.85rem}.stage .pat-secs{font-size:2.2rem}.stage .pat-pill{display:none}.stage .score{inset:auto 1rem 1rem;padding:.6rem .75rem;gap:.6rem}.stage .score .stat .big{font-size:2rem}.stage .score .stat+.stat{padding-left:.6rem}.stage .combo-dial{width:3.9rem;height:3.9rem}.stage .score .combo{grid-template-columns:3.9rem minmax(0,1fr);column-gap:.5rem}.stage .score .combo-dial .big{font-size:1.7rem}.stage .combo-help{top:-.3rem;right:-.3rem}.stage .score .label{font-size:.85rem}.stage .combo .combo-rate{font-size:.75rem}.stage .combo .sub{font-size:.7rem}.stage .score .stat:first-child>.sub{font-size:.7rem}.stage .warning-dock{inset:9rem 1rem 15.5rem}.stage .warning-message h2{font-size:1.4rem}.stage .warning-steps{display:flex}.lesson-outcome .journey-heading{flex-wrap:wrap}.lesson-outcome .journey-goal{flex:1;order:0;flex-basis:auto}.lesson-outcome .journey-controls{flex-basis:100%;justify-content:end}.lesson-outcome .goal-icon{width:2.6rem;height:2.6rem}.lesson-outcome .journey-map{padding-top:.5rem}.lesson-outcome .journey-stops{grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem .4rem}.lesson-outcome .route-meter{display:none}.lesson-outcome .journey-home{grid-column:1/-1;grid-row:2}.lesson-outcome .journey-cursor{display:none}}
+@media(prefers-reduced-motion:reduce){.stage[data-reaction] .marmot-wrap,.stage[data-reaction] .level-emblem{animation:none}#combo-ring-fill{transition:none}}
+/* Compact phone toolbar and a single pause label keep the character visible. */
+.stage .stage-chip{display:none}.stage .mascot-rank .stat.points{border:0;padding:0;grid-column:auto}
+@media(max-width:620px){.top .actions{display:flex;width:100%;flex-basis:100%;flex-wrap:nowrap;gap:.3rem;justify-content:space-between;margin-left:0}.top .actions .btn{flex:0 0 auto;min-width:44px;min-height:44px;padding:.3rem .5rem}.top #btn-full,.top #btn-settings{font-size:0}.top #full-label{display:none}.top #btn-full::before{content:'⛶';font-size:1.4rem}.top #btn-settings::before{content:'⚙';font-size:1.3rem}.stage .meter-marks{display:none}.stage .readout-head{flex-wrap:nowrap;gap:.2rem}.stage .readout{min-height:7rem}}
+/* Keep the red alert readable above the HUD, without the old oversized overlap. */
+.stage .banner{left:29%;right:27%;bottom:8.2rem;font-size:2.6rem;line-height:1.1;transform:none;text-shadow:2px 2px 0 #53271e;z-index:2}
+.stage[data-mood=alert] .banner{animation:none}.stage .banner small{display:none}.stage[data-mood=alert] .bubble{opacity:0}
+@media(max-width:620px){.stage .banner{left:10%;right:10%;bottom:15.8rem;font-size:2.2rem}}

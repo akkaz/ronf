@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="marmot" viewBox="-20 -30 280 266" role="img" aria-label="Marmotta addormentata"><style>.m-fur{fill:#a77449}.m-dark,.m-tail{fill:#7b5233}.m-belly{fill:#e4c69e}.m-ear{fill:#c99569}.m-cap{fill:#7b5233;opacity:.45}.m-muzzle{fill:#f0dfc2}.m-blush{fill:#e98a7a;opacity:.5}.m-nose{fill:#3a2419}.m-lips{fill:none;stroke:#3a2419;stroke-width:3;stroke-linecap:round}.m-tooth{fill:#fffdf6;stroke:#3a2419;stroke-width:1.5}.m-eyes-sleep path{fill:none;stroke:#3a2419;stroke-width:4.5;stroke-linecap:round}.m-whiskers{fill:none;stroke:#3a2419;stroke-width:1.6;opacity:.45}.m-hole{fill:#102b2420}.m-eyes-half,.m-eyes-open,.m-brows,.m-mouth-open,.m-bang{display:none}.m-zzz text{font-family:Arial,sans-serif;font-weight:bold;fill:#bbccac}</style>
+          <ellipse class="m-hole" cx="120" cy="224" rx="106" ry="12"/>
+          <g class="m-breathe">
+            <path class="m-tail" d="M186 196c26-2 40-20 36-46-1-7-9-8-11-2-4 18-14 30-30 34z"/>
+            <ellipse class="m-fur" cx="120" cy="172" rx="78" ry="56"/>
+            <ellipse class="m-belly" cx="120" cy="184" rx="48" ry="40"/>
+            <ellipse class="m-dark" cx="90" cy="218" rx="19" ry="9"/>
+            <ellipse class="m-dark" cx="150" cy="218" rx="19" ry="9"/>
+            <circle class="m-dark" cx="73" cy="58" r="16"/><circle class="m-ear" cx="73" cy="59" r="8"/>
+            <circle class="m-dark" cx="167" cy="58" r="16"/><circle class="m-ear" cx="167" cy="59" r="8"/>
+            <ellipse class="m-fur" cx="120" cy="98" rx="63" ry="54"/>
+            <path class="m-cap" d="M68 80c18-40 86-40 104 0-30-14-74-14-104 0z"/>
+            <ellipse class="m-muzzle" cx="120" cy="122" rx="33" ry="25"/>
+            <circle class="m-blush" cx="80" cy="120" r="10"/><circle class="m-blush" cx="160" cy="120" r="10"/>
+            <ellipse class="m-mouth-open" cx="120" cy="137" rx="14" ry="12"/>
+            <path class="m-lips" d="M120 112v6M106 117c5 6 10 6 14 1 4 5 9 5 14-1"/>
+            <rect class="m-tooth" x="113" y="118" width="7" height="11" rx="2"/><rect class="m-tooth" x="120" y="118" width="7" height="11" rx="2"/>
+            <ellipse class="m-nose" cx="120" cy="108" rx="10" ry="7"/>
+            <path class="m-whiskers" d="M90 124l-28-4M90 130l-26 5M150 124l28-4M150 130l26 5"/>
+            <g class="m-eyes-sleep"><path d="M85 94c6 7 15 7 21 0M134 94c6 7 15 7 21 0"/></g>
+            <g class="m-eyes-half"><path d="M85 94c6 7 15 7 21 0"/><circle cx="145" cy="92" r="7.5"/><circle class="m-glint" cx="147.5" cy="89.5" r="2.4"/></g>
+            <g class="m-eyes-open"><circle cx="95" cy="92" r="8.5"/><circle cx="145" cy="92" r="8.5"/><circle class="m-glint" cx="97.5" cy="89.5" r="2.7"/><circle class="m-glint" cx="147.5" cy="89.5" r="2.7"/></g>
+            <path class="m-brows" d="M82 73l24 10M158 73l-24 10"/>
+          </g>
+          <g class="m-zzz"><text x="190" y="34" font-size="30">Z</text><text x="212" y="10" font-size="22">z</text><text x="230" y="-10" font-size="15">z</text></g>
+          <g class="m-bang"><text x="-6" y="70">!</text><text x="222" y="62">!</text></g>
+        </svg>

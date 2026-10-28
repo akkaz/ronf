@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.vercel/
+.impeccable/
+.env*
+!.env.example
+*.log
+ronf-backup-*.json
+.DS_Store
+.vercel

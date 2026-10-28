@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ronf · Fate squadra. Non svegliatela.</title>
+<meta name="description" content="Fate squadra. Non svegliate la marmotta. Ronf trasforma il rumore in aula in un gioco cooperativo: gratuito e open source, senza account né registrazioni audio.">
+<meta name="theme-color" content="#233f38">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23233f38'/%3E%3Crect x='6' y='18' width='5' height='8' rx='1.5' fill='%232e8b57'/%3E%3Crect x='13.5' y='12' width='5' height='14' rx='1.5' fill='%23e3a008'/%3E%3Crect x='21' y='6' width='5' height='20' rx='1.5' fill='%23d63a2c'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="./board.css">
+<link rel="stylesheet" href="./lesson-board.css">
+<link rel="stylesheet" href="./ronf.css">
+<link rel="icon" href="./assets/marmotta.svg" type="image/svg+xml">
+<link rel="canonical" href="https://ronf.akkaz.dev/gioca.html">
+<meta property="og:title" content="Ronf · Non svegliatela">
+<meta property="og:description" content="La marmotta che aiuta la classe a fare squadra. Gratis, open source, senza account.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ronf.akkaz.dev/gioca.html">
+</head>
+<body data-zone="ok" data-auth="ready">
+<div class="app">
+  <header class="top">
+    <button class="btn brand-home" id="back-to-class" type="button" aria-label="Torna alla schermata iniziale">Ronf<span aria-hidden="true">zz</span></button>
+    <h1 class="app-name">Fate squadra. Non svegliatela.</h1>
+    <div class="top-classes"><span class="label">Classe</span><div class="chips" data-chips></div></div>
+    <button class="demo-chip" id="demo-chip" type="button" hidden>Demo · passa al microfono</button>
+    <div class="actions">
+      <button class="btn" id="btn-about" type="button">Come si gioca</button>
+      <button class="btn" id="btn-end" type="button">Termina</button>
+      <button class="btn" id="btn-pause" type="button" aria-pressed="false"><span id="pause-label">Pausa</span> <kbd>Spazio</kbd></button>
+      <button class="btn" id="btn-full" type="button" aria-label="Schermo intero"><span id="full-label">Schermo intero</span> <kbd>F</kbd></button>
+      <button class="btn" id="btn-settings" type="button" aria-label="Impostazioni">Impostazioni <kbd>S</kbd></button>
+    </div>
+  </header>
+
+  <main class="board">
+    <section class="stage" id="stage" data-mood="sleep" aria-label="La marmotta">
+      
+      <div class="sky sky-night"></div><div class="sky sky-dawn"></div><div class="sky sky-day"></div><div class="sky sky-alarm"></div>
+      <svg class="range" viewBox="0 0 400 120" preserveAspectRatio="none" aria-hidden="true">
+        <path class="r-back" d="M0 70 40 52 72 64 120 30 150 50 190 20 214 40 262 16 300 46 340 34 400 56V120H0Z"/>
+        <path class="r-front" d="M0 92 50 74 96 86 150 58 176 72 220 48 246 66 300 58 352 80 400 72V120H0Z"/>
+        <path class="r-meadow" d="M0 104C80 94 160 98 240 96 310 94 360 98 400 102V120H0Z"/>
+      </svg>
+      <div class="mascot-rank" id="mascot-rank" data-tier="bronze" aria-label="Livello della mascotte">
+        <div class="level-emblem" aria-hidden="true"><span class="emblem-caption">LIV</span><strong id="rank-number">1</strong><span class="rank-stars">★ ★ ★</span></div>
+        <div class="rank-copy"><strong id="rank-name">Pisolino</strong><div class="stat points">
+        <div class="points-row"><p class="label">XP totali <span class="sr-only" id="points-class">La mia classe</span></p><span class="level-name sr-only" id="level-name">Liv. 1 · Pisolino</span></div>
+        <p class="big xp-total"><span id="points">0</span><small>XP</small></p>
+        <div class="level-bar sr-only"><i id="level-fill"></i></div>
+        <p class="sub"><span id="level-next" class="sr-only">60 XP al livello 2</span><span id="session-points">+0 XP oggi</span></p>
+        <p class="xp-purpose sr-only">Esperienza della classe: fa crescere la mascotte.</p>
+      </div><div class="rank-progress" id="rank-progress" role="progressbar" aria-label="Avanzamento al prossimo livello" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="rank-fill"></i></div><span id="rank-next">60 XP al prossimo</span></div>
+      </div>
+      <div class="bubble"><strong id="bubble-title" aria-live="polite">Zzz… la marmotta dorme</strong><span id="bubble-sub">Accendi il detector per iniziare</span></div>
+      <div class="marmot-wrap"><div class="mascot-sprite" aria-hidden="true"></div>
+        <svg class="marmot" viewBox="-20 -30 280 266" aria-hidden="true">
+          <ellipse class="m-hole" cx="120" cy="224" rx="106" ry="12"/>
+          <g class="m-breathe">
+            <path class="m-tail" d="M186 196c26-2 40-20 36-46-1-7-9-8-11-2-4 18-14 30-30 34z"/>
+            <ellipse class="m-fur" cx="120" cy="172" rx="78" ry="56"/>
+            <ellipse class="m-belly" cx="120" cy="184" rx="48" ry="40"/>
+            <ellipse class="m-dark" cx="90" cy="218" rx="19" ry="9"/>
+            <ellipse class="m-dark" cx="150" cy="218" rx="19" ry="9"/>
+            <circle class="m-dark" cx="73" cy="58" r="16"/><circle class="m-ear" cx="73" cy="59" r="8"/>
+            <circle class="m-dark" cx="167" cy="58" r="16"/><circle class="m-ear" cx="167" cy="59" r="8"/>
+            <ellipse class="m-fur" cx="120" cy="98" rx="63" ry="54"/>
+            <path class="m-cap" d="M68 80c18-40 86-40 104 0-30-14-74-14-104 0z"/>
+            <ellipse class="m-muzzle" cx="120" cy="122" rx="33" ry="25"/>
+            <circle class="m-blush" cx="80" cy="120" r="10"/><circle class="m-blush" cx="160" cy="120" r="10"/>
+            <ellipse class="m-mouth-open" cx="120" cy="137" rx="14" ry="12"/>
+            <path class="m-lips" d="M120 112v6M106 117c5 6 10 6 14 1 4 5 9 5 14-1"/>
+            <rect class="m-tooth" x="113" y="118" width="7" height="11" rx="2"/><rect class="m-tooth" x="120" y="118" width="7" height="11" rx="2"/>
+            <ellipse class="m-nose" cx="120" cy="108" rx="10" ry="7"/>
+            <path class="m-whiskers" d="M90 124l-28-4M90 130l-26 5M150 124l28-4M150 130l26 5"/>
+            <g class="m-eyes-sleep"><path d="M85 94c6 7 15 7 21 0M134 94c6 7 15 7 21 0"/></g>
+            <g class="m-eyes-half"><path d="M85 94c6 7 15 7 21 0"/><circle cx="145" cy="92" r="7.5"/><circle class="m-glint" cx="147.5" cy="89.5" r="2.4"/></g>
+            <g class="m-eyes-open"><circle cx="95" cy="92" r="8.5"/><circle cx="145" cy="92" r="8.5"/><circle class="m-glint" cx="97.5" cy="89.5" r="2.7"/><circle class="m-glint" cx="147.5" cy="89.5" r="2.7"/></g>
+            <path class="m-brows" d="M82 73l24 10M158 73l-24 10"/>
+          </g>
+          <g class="m-zzz"><text x="190" y="34" font-size="30">Z</text><text x="212" y="10" font-size="22">z</text><text x="230" y="-10" font-size="15">z</text></g>
+          <g class="m-bang"><text x="-6" y="70">!</text><text x="222" y="62">!</text></g>
+        </svg>
+      </div>
+      <div class="banner" aria-hidden="true">SILENZIO!<small id="banner-sub">richiamo tra 10 s</small></div>
+      <div class="stage-chip" id="stage-chip" hidden>In pausa</div>
+      
+      <section class="panel readout" aria-label="Rumore in aula">
+      <div class="readout-head"><p class="label">Rumore</p><p class="db-meta">stima del browser · picco degli ultimi 3 s: <b id="db-peak">--</b> dB</p><span class="zone-pill" id="zone-pill">In attesa</span></div>
+      <div class="readout-main">
+        <div class="db-box"><div class="db" aria-hidden="true"><span class="db-value" id="db-value">--</span><span class="db-unit">dB</span></div></div>
+        <div class="meter" id="meter" aria-hidden="true">
+          <div class="meter-track"><div class="meter-cover" id="meter-cover"></div><div class="meter-peak" id="meter-peak"></div></div>
+          <div class="meter-marks"><span class="mark warn" id="mark-warn">attenzione 60</span><span class="mark bad" id="mark-alert">silenzio 70</span></div>
+        </div>
+      </div>
+    </section>
+<section class="panel patience" id="patience" data-state="idle" aria-label="Pazienza della mascotte">
+      <div class="patience-head"><p class="label">Pazienza</p><span class="pat-pill" id="pat-pill">In attesa</span></div>
+      <div class="patience-main">
+        <p class="pat-secs" aria-label="Secondi rimasti"><span id="pat-secs">10</span><small>s</small></p>
+        <div>
+          <div class="pat-bar" aria-hidden="true"><i id="pat-fill"></i></div>
+          <p class="pat-rule"><b>Richiamo a 0</b><span id="pat-thr">80 dB</span><span class="recall-counter" title="Richiami della lezione">! <b id="nota-count">0</b></span></p>
+        </div>
+      </div>
+    </section>
+<section class="panel score" aria-label="Esperienza della classe, letargo e combo">
+      <div class="stat"><p class="label">Letargo</p><p class="big" id="streak">00:00</p><p class="sub">record <span id="record-class">La mia classe</span>: <b id="record">00:00</b></p><small id="record-author"></small></div>
+      <div class="stat combo" id="combo-box"><p class="label">Combo XP</p><div class="combo-dial"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="combo-ring-track" cx="50" cy="50" r="43"/><circle id="combo-ring-fill" cx="50" cy="50" r="43" pathLength="100"/></svg><p class="big" id="combo">×1</p></div><p class="combo-rate" id="combo-rate">1 secondo verde = 1 XP</p><div class="combo-meter" aria-hidden="true"><i id="combo-fill"></i></div><p class="sub" id="combo-next">×2 tra 01:00</p><button class="combo-help" id="combo-help" type="button" aria-label="Come funziona la combo XP" title="Come funziona la combo XP">?</button></div>
+      
+    </section>
+<section class="warning-dock" id="nota" data-phase="1" aria-labelledby="nota-title" hidden>
+        <div class="warning-top"><span id="nota-kicker">Richiamo 1 di 4</span><button class="btn" id="nota-close" type="button">Chiudi · docente</button></div>
+        <ol id="ladder" class="warning-steps" aria-label="Fasi del richiamo"><li>Richiamo</li><li>Preavviso</li><li>Ultimo avviso</li><li>Docente</li></ol>
+        <div class="warning-message"><span class="warning-symbol" aria-hidden="true">!</span><div><h2 id="nota-title">Ritroviamo la calma</h2><p id="nota-text"></p></div></div>
+        <div class="warning-recovery"><p id="live-status"></p><p class="recovery-label"><b id="calm-label">Calma per annullare</b><span id="calm-text"></span></p><div class="nbar"><i id="calm-fill"></i></div></div>
+        <div class="warning-bottom"><span><b id="live-db">--</b> dB adesso</span><span id="esc-text"></span></div>
+        <div class="warning-escalation" id="warning-escalation"><span id="esc-label"></span><div class="nbar"><i id="esc-fill"></i></div></div>
+        <p class="warning-note">Il richiamo si annulla con la calma. Ogni provvedimento resta una decisione del docente.</p>
+      </section>
+    </section>
+
+    
+
+    
+
+    
+
+    
+<section class="lesson-outcome" aria-label="Rumore, energia, premi e conseguenze"><section class="session-history" aria-labelledby="history-title">
+        <div class="history-heading"><h2 id="history-title">Rumore nell’ora</h2><span id="history-summary">In attesa del microfono</span></div>
+        <canvas id="lesson-chart" role="img" aria-label="Rumore dall’inizio della lezione, in decibel"></canvas>
+        <p class="history-empty" id="history-empty">Il grafico parte col microfono</p>
+      <p class="history-link">Verde: energia ↑ · Rosso: energia ↓</p></section><section class="panel rewards journey" aria-labelledby="journey-title">
+      <div class="journey-heading">
+        <div class="energy-hud"><div><h2 id="energy-title">Energia</h2><span class="lesson-label">Questa lezione</span></div><p class="energy-number"><span class="bal" id="bal">0</span><span class="energy-max">/100</span></p></div>
+        <div class="goal-icon" id="goal-icon" aria-hidden="true"></div><div class="journey-goal"><h2 id="journey-title">La rotta della classe</h2><p class="rewards-sum" id="rewards-sum">Prossimo premio: Pausa</p></div>
+        <div class="journey-totals"><span class="reward-count" id="reward-count">0 / 4 premi</span><span id="consequence-count" class="consequence-count">0 attive</span></div>
+        <div class="journey-controls"><button class="btn small" id="bal-minus" type="button" aria-label="Togli 5 di energia" title="Docente: −5 di energia">−5</button><button class="btn small" id="bal-plus" type="button" aria-label="Aggiungi 5 di energia" title="Docente: +5 di energia">+5</button><button class="btn small" id="edit-rewards" type="button" aria-label="Personalizza premi e conseguenze" title="Personalizza premi e conseguenze">⚙</button></div>
+      </div>
+      <div class="journey-legend" aria-hidden="true"><span>← Conseguenze</span><span>Premi →</span></div>
+      <div class="journey-map" id="journey-map">
+        <div class="route-meter" id="energy-meter" role="meter" aria-label="Energia della lezione" aria-valuemin="-100" aria-valuemax="100" aria-valuenow="0"><i class="tug-neg" id="tug-neg"></i><i class="tug-pos" id="tug-pos"></i></div>
+        <div class="journey-cursor" id="journey-cursor" aria-hidden="true"><span>Ora</span><i></i></div>
+        <ol class="perks journey-stops" id="perks" aria-label="Percorso delle conseguenze e dei premi, da meno 100 a più 100"></ol>
+      </div>
+    </section></section>
+  </main>
+</div>
+
+<div class="overlay start" id="start" role="dialog" aria-modal="true" aria-labelledby="start-title">
+  <div class="start-card">
+    <a class="start-brand" href="./" aria-label="Ronf, pagina iniziale">Ronf<span aria-hidden="true">zz</span></a><img class="welcome-mascot" src="./assets/marmotta.svg" width="140" height="140" alt="La marmotta dorme tranquilla">
+    <h2 id="start-title">Pronti per il pisolino?</h2>
+    <p>Scegli la classe e accendi il microfono. Oppure esplora il gioco con la simulazione.</p>
+    <div class="game-guide"><div><b>★ XP della classe</b><span>Restano su questo browser e fanno crescere la mascotte tra una lezione e l’altra.</span></div><div><b>ϟ Energia della lezione</b><span>Da −100 a +100. Riparte da 0: a 25, 50, 75 e 100 sbloccate i premi.</span></div></div>
+    <ul class="rules">
+      <li><i style="background:var(--ok)"></i><span><b>Verde:</b> dorme. Guadagnate XP ed energia. Le combo moltiplicano gli XP.</span></li>
+      <li><i style="background:var(--warn)"></i><span><b>Giallo:</b> si agita. XP ed energia restano fermi finché non torna la calma.</span></li>
+      <li><i style="background:var(--bad)"></i><span><b>Rosso:</b> SILENZIO! La combo si azzera e la pazienza della mascotte si consuma.</span></li>
+      <li><i style="background:var(--ink)"></i><span><b>Pazienza a zero:</b> richiamo. Se il rumore continua arrivano altri richiami, fino all’intervento del docente. Il silenzio la annulla.</span></li>
+      <li><i style="background:var(--violet)"></i><span><b>Premi e punizioni:</b> il silenzio sblocca pause e niente compiti, il casino porta compiti in più e verifiche. Si vincono e si perdono fino alla fine dell'ora.</span></li>
+    </ul>
+<p id="lesson-summary" class="lesson-summary" role="status" hidden></p>
+    <div class="start-row"><span class="label">Classe</span><div class="chips" data-chips></div></div>
+    <div class="start-actions">
+      <button class="btn primary" id="start-mic" type="button">Accendi il microfono</button>
+      <button class="btn" id="start-measure" type="button">Accendi e misura il silenzio (5 s)</button>
+      <button class="btn" id="start-demo" type="button">Guarda la simulazione</button>
+    </div>
+    <p class="error" id="start-error" role="alert" hidden></p>
+    <p class="start-note"><span id="start-thresholds">Soglie: attenzione 60 dB, silenzio 70 dB, preavviso dopo 10 s.</span> <button class="linklike" id="start-settings" type="button">Cambia le impostazioni</button></p>
+    <p class="start-note privacy-note">Il microfono resta sul tuo dispositivo. Nessun audio registrato o inviato. Gratis, senza account.</p>
+    <div class="welcome-links"><button class="linklike" id="welcome-about" type="button">Come funziona e privacy</button><a href="https://github.com/akkaz/ronf" target="_blank" rel="noopener">Open source su GitHub ↗</a></div>
+  </div>
+</div>
+
+<dialog id="about" aria-labelledby="about-title"><div class="dlg-head"><h2 id="about-title">Un pisolino di squadra</h2><form method="dialog"><button class="btn primary">Chiudi</button></form></div><div class="dlg-body about-copy">
+<p>Proiettate Ronf e scegliete insieme i premi. Quando il rumore resta sotto la soglia, la mascotte dorme: la classe guadagna XP e si avvicina al prossimo premio. Il docente può mettere in pausa mentre spiega e regolare la sensibilità per l’attività.</p>
+<p><strong>XP e livelli</strong> crescono tra le lezioni. <strong>L’energia</strong> riparte da zero e sblocca i premi della lezione. Le conseguenze sono facoltative: per impostazione iniziale sono tutte vuote.</p>
+<p><strong>Il microfono lavora sul tuo dispositivo.</strong> Ronf non registra né invia audio. I livelli sono stime del browser: regola le soglie nella tua aula. Non è un fonometro professionale.</p>
+<p>Classi, preferenze, XP e record restano in questo browser. Se cancelli i dati del sito li perdi: usa <strong>Esporta backup</strong> nelle impostazioni per conservarli o cambiare computer. Sullo stesso browser condiviso, gli altri utilizzatori possono vedere questi dati. Usa nomi di classe, senza nomi degli studenti.</p>
+<p>La simulazione permette di esplorare tutto senza microfono e non salva i punti. L’avviso al cambio dell’ora si può attivare nelle impostazioni.</p>
+<p>Creato da <a href="https://akkaz.dev" target="_blank" rel="noopener">Gio Marco Baglioni</a>, nato dall’esperienza in aula. <a href="https://github.com/akkaz/ronf" target="_blank" rel="noopener">Codice su GitHub · licenza MIT</a>.</p>
+</div></dialog>
+
+<div class="calm-returned" id="relief" role="status" hidden>✓ Calma ritrovata · richiamo annullato</div>
+<dialog id="combo-guide" aria-labelledby="combo-title"><form method="dialog"><div class="dlg-head"><h2 id="combo-title">Come funziona la combo</h2><button class="btn primary">Ho capito</button></div><div class="dlg-body">
+<p>La combo moltiplica gli <b>XP della classe</b>. A ×3, per esempio, 10 secondi in verde valgono <b>30 XP</b>. L’energia dei premi cresce alla sua velocità normale.</p>
+<ol class="combo-ladder"><li>Da subito: <b>×1</b></li><li>Dopo 1 minuto in verde: <b>×2</b></li><li>Dopo 3 minuti: <b>×3</b></li><li>Dopo 5 minuti: <b>×4</b></li><li>Dopo 10 minuti: <b>×5</b></li></ol>
+<p><b>Verde:</b> tempo e XP crescono. <b>Giallo:</b> la combo resta, ma tempo e XP si fermano. <b>Rosso per 0,6 secondi:</b> si torna a ×1. Durante la pausa il gioco resta fermo.</p></div></form></dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><strong id="toast-title"></strong><span id="toast-sub"></span></div>
+<div class="confetti" id="confetti" aria-hidden="true"></div>
+
+<dialog id="settings" aria-labelledby="settings-title">
+  <form method="dialog">
+    <div class="dlg-head"><h2 id="settings-title">Impostazioni</h2><button class="btn primary" value="close">Fatto</button></div>
+    <div class="dlg-body">
+      <section id="class-game-settings">
+        <h3>Questa classe: <span id="profile-class"></span></h3>
+        <div class="field"><label for="set-class">Classe da configurare</label><select id="set-class"></select></div>
+        <p class="help">Premi, disponibilità dei PC e mascotte si salvano separatamente per ogni classe.</p>
+        <label class="check"><input type="checkbox" id="set-auto-end"> Avviso al cambio dell’ora</label>
+        <div class="field"><label for="set-bells">Cambio dell’ora</label><input id="set-bells" type="text" placeholder="09:00, 10:00, 11:00" aria-describedby="bells-help"><p id="bells-help" class="help">Orari locali, separati da virgole. Se attivato, l’avviso lascia due minuti per continuare; altrimenti la lezione termina.</p></div>
+        <div class="field"><label for="set-mascot">Mascotte della classe</label><select id="set-mascot"><option value="marmot">Marmotta</option><option value="fox">Volpe</option><option value="cat">Gatto</option><option value="bear">Orso</option></select><div id="mascot-preview" class="mascot-preview" data-mascot="marmot" aria-hidden="true"><span>🐾</span></div></div>
+      </section>
+      <section>
+        <h3>Soglie</h3>
+        <div class="now">Adesso in aula: <b><span id="set-now">--</span> dB</b> <span class="help" id="set-now-zone"></span></div>
+        <div class="history">
+          <div class="panel-head"><p class="label">Ultimi 2 minuti</p><span class="legend"><span><b style="color:var(--warn)"></b>attenzione</span><span><b style="color:var(--bad)"></b>silenzio</span></span></div>
+          <canvas class="chart" id="chart"></canvas>
+          <p class="floor" id="set-floor"></p>
+        </div>
+        <div class="field">
+          <label for="set-warn">Soglia di attenzione <span class="dot" style="background:var(--warn)"></span></label>
+          <div class="range-row"><input type="range" id="set-warn" min="35" max="93" step="1"><output id="out-warn" for="set-warn">60 dB</output></div>
+          <p class="help">Sopra questo livello la mascotte si agita e XP ed energia smettono di crescere.</p>
+        </div>
+        <div class="field">
+          <label for="set-alert">Soglia SILENZIO! <span class="dot" style="background:var(--bad)"></span></label>
+          <div class="range-row"><input type="range" id="set-alert" min="37" max="95" step="1"><output id="out-alert" for="set-alert">70 dB</output></div>
+          <p class="help">Se il rumore resta sopra questo livello per più di mezzo secondo compare l'avviso SILENZIO! e la pazienza della mascotte inizia a consumarsi.</p>
+        </div>
+        <div class="field">
+          <label for="set-nota">Pazienza: secondi prima del richiamo</label>
+          <div class="range-row"><input type="range" id="set-nota" min="3" max="60" step="1"><output id="out-nota" for="set-nota">10 s</output></div>
+          <p class="help">Quanti secondi sopra la soglia rossa bastano per azzerare la pazienza. Le pause brevi (meno di 1,5 s) non la ricaricano.</p>
+        </div>
+        <div class="field">
+          <label for="set-step">Secondi di rumore tra un avviso e l'altro</label>
+          <div class="range-row"><input type="range" id="set-step" min="4" max="30" step="1"><output id="out-step" for="set-step">8 s</output></div>
+          <p class="help">Dopo il preavviso, se il rumore continua arrivano altri tre avvisi: preavviso, ultimo avviso, intervento del docente. Conta solo il rumore sopra la soglia rossa.</p>
+        </div>
+        <div class="field">
+          <label for="set-calm">Silenzio per annullare</label>
+          <div class="range-row"><input type="range" id="set-calm" min="2" max="15" step="1"><output id="out-calm" for="set-calm">5 s</output></div>
+          <p class="help">Secondi di calma per chiudere il preavviso. Sotto la soglia gialla contano per intero, tra gialla e rossa a metà. Agli avvisi successivi ne servono di più, fino al doppio all’ultimo livello. Il rumore sopra la soglia rossa non azzera il conto: lo fa scendere piano.</p>
+        </div>
+        <div class="field">
+          <button class="btn" id="measure" type="button">Misura il silenzio dell'aula (5 s)</button>
+          <p class="help">Chiedi alla classe 5 secondi di silenzio: le soglie diventano silenzio + 10 dB (attenzione) e silenzio + 20 dB (SILENZIO!). Se in silenzio assoluto il microfono segna 60 dB, le soglie diventano 70 e 80.</p>
+          <p class="status" id="measure-status" role="status"></p>
+        </div>
+      </section>
+      <section>
+        <h3>Microfono</h3>
+        <div class="field">
+          <label for="set-mic">Microfono in uso</label>
+          <select id="set-mic"><option value="">Microfono predefinito di sistema</option></select>
+          <p class="help" id="mic-help">Puoi scegliere un microfono USB o quello della webcam e metterlo verso i banchi: sentirà meno la tua voce. Il detector spegne i filtri automatici del browser per misurare meglio.</p>
+        </div>
+        <div class="field">
+          <label for="set-cal">Taratura</label>
+          <div class="range-row"><input type="range" id="set-cal" min="-40" max="40" step="1"><output id="out-cal" for="set-cal">+0 dB</output></div>
+          <p class="help">Il browser stima i dB, non li misura come un fonometro. Per valori realistici allinealo a un fonometro o a un'app sul telefono, qui sotto.</p>
+        </div>
+        <div class="field">
+          <label for="set-ref">Allinea al fonometro: il telefono segna</label>
+          <div class="range-row"><input type="number" id="set-ref" min="20" max="130" step="1" inputmode="numeric" placeholder="es. 62"><button class="btn" id="align" type="button">Allinea</button></div>
+          <p class="help">Metti il telefono accanto al microfono e fai un rumore costante per qualche secondo: qualcuno che legge ad alta voce, una ventola, un video. Scrivi il valore medio che vedi sull'app e premi Allinea: il detector sposta la taratura per segnare lo stesso.</p>
+          <p class="status" id="align-status" role="status"></p>
+        </div>
+      </section>
+      <section>
+        <h3>Premi di <span id="rewards-class"></span></h3>
+        <label class="check"><input type="checkbox" id="set-has-pc"> La classe può usare i PC per i premi</label>
+        <p class="help" id="pc-rewards-help">I premi che richiedono un PC vengono esclusi quando i PC non sono disponibili.</p>
+        <div class="preset-actions"><span>Proposte pronte:</span><button class="btn" id="preset-classroom" type="button">Aula senza PC</button><button class="btn" id="preset-lab" type="button">Laboratorio con PC</button></div>
+        <p class="help">L’energia della lezione va da −100 a +100 e riparte da zero a ogni lezione. Il silenzio (sotto la soglia gialla) lo fa salire; sopra la soglia rossa scende tre volte più in fretta. SILENZIO! toglie 2 di energia, il richiamo 10, ogni avviso successivo 5 o 10. Con i tasti + e − aggiungi o togli 5 di energia. Le combo moltiplicano solo gli XP storici; l’energia cresce sempre alla stessa velocità. Lascia vuota una casella per non usarla.</p>
+        <div class="perk-fields">
+          <div class="field"><label for="set-r0">Premio a +25</label><input type="text" id="set-r0" maxlength="40"><label class="check small-check"><input type="checkbox" id="set-rpc0"> Richiede un PC</label></div>
+          <div class="field"><label for="set-p0">Conseguenza a −25</label><input type="text" id="set-p0" maxlength="28"></div>
+          <div class="field"><label for="set-r1">Premio a +50</label><input type="text" id="set-r1" maxlength="40"><label class="check small-check"><input type="checkbox" id="set-rpc1"> Richiede un PC</label></div>
+          <div class="field"><label for="set-p1">Conseguenza a −50</label><input type="text" id="set-p1" maxlength="28"></div>
+          <div class="field"><label for="set-r2">Premio a +75</label><input type="text" id="set-r2" maxlength="40"><label class="check small-check"><input type="checkbox" id="set-rpc2"> Richiede un PC</label></div>
+          <div class="field"><label for="set-p2">Conseguenza a −75</label><input type="text" id="set-p2" maxlength="28"></div>
+          <div class="field"><label for="set-r3">Premio a +100</label><input type="text" id="set-r3" maxlength="40"><label class="check small-check"><input type="checkbox" id="set-rpc3"> Richiede un PC</label></div>
+          <div class="field"><label for="set-p3">Conseguenza a −100</label><input type="text" id="set-p3" maxlength="28"></div>
+        </div>
+        <div class="field">
+          <label for="set-rmin">Minuti in verde per arrivare a 100 di energia</label>
+          <div class="range-row"><input type="range" id="set-rmin" min="5" max="60" step="1"><output id="out-rmin" for="set-rmin">25 min</output></div>
+        </div>
+      </section>
+      <section>
+        <h3>Classi e gioco</h3>
+        <div class="field">
+          <label for="set-classes">Classi</label>
+          <textarea id="set-classes" rows="3" autocomplete="off" spellcheck="false"></textarea>
+          <p class="help">Separate da virgola, fino a 120 classi. Ogni classe ha preferenze, XP e record propri su questo browser.</p>
+          <button class="btn" id="save-classes" type="button">Salva classi</button>
+        </div>
+        <label class="check"><input type="checkbox" id="set-sound"> Suoni (avviso, fischietto, livelli)</label>
+        <p class="help">Mentre suona, il detector ignora il microfono per non sentirsi da solo.</p>
+        <div class="start-actions">
+          <button class="btn" id="new-lesson" type="button">Nuova lezione</button>
+          <button class="btn danger" id="reset-league" type="button">Azzera XP e record</button>
+        </div>
+        <div class="backup-tools"><h3>Porta Ronf con te</h3><p class="help">Esporta classi, impostazioni, XP e record. Importare un backup sostituisce i dati di questo browser, dopo la tua conferma.</p><div class="start-actions"><button class="btn" id="export-backup" type="button">Esporta backup</button><button class="btn" id="import-backup" type="button">Importa backup</button></div><input type="file" id="backup-file" accept="application/json,.json" hidden><div id="import-preview" hidden><p id="import-summary"></p><button class="btn danger" id="confirm-import" type="button">Sostituisci con questo backup</button><button class="btn" id="cancel-import" type="button">Annulla</button></div></div>
+        <p class="status" id="data-status" role="status"></p>
+      </section>
+      <section>
+        <h3>Tasti rapidi</h3>
+        <dl class="keys">
+          <dt><kbd>Spazio</kbd></dt><dd>pausa, per esempio mentre spieghi</dd>
+          <dt><kbd>F</kbd></dt><dd>schermo intero</dd>
+          <dt><kbd>S</kbd></dt><dd>impostazioni</dd>
+          <dt><kbd>Esc</kbd></dt><dd>chiude il preavviso o questa finestra</dd>
+        </dl>
+      </section>
+    </div>
+  </form>
+</dialog>
+
+<section id="hour-prompt" class="hour-prompt" role="dialog" aria-labelledby="hour-title" hidden><h2 id="hour-title">È cambiata l’ora</h2><p>Continuiamo con questa classe? Senza risposta, la lezione termina tra <span id="hour-countdown">120</span> secondi.</p><button class="btn primary" id="hour-continue" type="button">Continua la lezione</button><button class="btn" id="hour-finish" type="button">Termina</button></section>
+<noscript><p style="position:fixed;inset:auto 16px 16px;background:#fff;border:2px solid #d63a2c;padding:12px;border-radius:10px">Ronf ha bisogno di JavaScript attivo.</p></noscript>
+
+<script type="module" src="./app.js"></script>
+</body>
+</html>
