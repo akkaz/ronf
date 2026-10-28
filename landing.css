@@ -1,24 +1,53 @@
-@font-face{font-family:Atkinson;src:url('./assets/fonts/atkinson-regular.ttf') format('truetype');font-weight:400;font-display:swap}
-@font-face{font-family:Atkinson;src:url('./assets/fonts/atkinson-bold.ttf') format('truetype');font-weight:700;font-display:swap}
-@font-face{font-family:Bungee;src:url('./assets/fonts/bungee.ttf') format('truetype');font-weight:400;font-display:swap}
-:root{color-scheme:light;--paper:#f0f3e9;--ink:#233f38;--muted:#4d6255;--violet:#5d3c7d;font-family:Atkinson,Arial,sans-serif;font-size:16px;color:var(--ink);background:var(--paper);scrollbar-color:#8b9e8c var(--paper);accent-color:var(--ink)}
+@font-face{font-family:Outfit;font-weight:100 900;font-display:swap;src:url('./assets/fonts/outfit.ttf') format('truetype')}
+@font-face{font-family:Caveat;font-weight:400 700;font-display:swap;src:url('./assets/fonts/caveat.ttf') format('truetype')}
+
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;min-height:100svh;display:grid;place-items:center;padding:2rem 1.5rem}
-::selection{background:#e3d6ed;color:var(--ink)}
-a{color:inherit;text-underline-offset:.22em}
-a:focus-visible{outline:3px solid var(--violet);outline-offset:6px}
-.sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%)}
-main{width:100%;max-width:28rem;text-align:center}
-.mascot{display:block;object-fit:contain;width:112px;height:112px;margin:0 auto 1rem}
-h1{position:relative;width:max-content;margin:0 auto;font-family:Bungee,Atkinson,sans-serif;font-size:clamp(4rem,14vw,6rem);font-weight:400;line-height:1.1;letter-spacing:-.025em}
-h1 span{position:absolute;top:-.2em;right:-.5em;font-family:Atkinson,sans-serif;font-size:.24em;font-weight:700;letter-spacing:.02em;color:var(--violet);transform:rotate(-13deg)}
-.description{max-width:34ch;margin:1.5rem auto 2rem;font-size:1.15rem;line-height:1.5;color:var(--muted);text-wrap:pretty}
-.play-button{display:flex;align-items:center;justify-content:center;gap:.8rem;min-height:80px;padding:1.25rem 1.6rem;background:var(--ink);color:#fff;border-radius:12px;font-size:1.6rem;font-weight:700;line-height:1.2;text-decoration:none;transition:background .18s ease-out}
-.play-button svg{flex:none}
-.play-button:hover{background:#345d48}
-.availability{margin:.9rem 0 1.8rem;font-size:.95rem;line-height:1.5;color:var(--muted)}
-.github-link{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:44px;padding:.5rem;font-size:.95rem;line-height:1.4;text-decoration:none}
-.github-link img{display:block;flex:none}
-.github-link:hover{text-decoration:underline}
-@media(max-height:600px){body{padding-block:1.5rem}.mascot{width:80px;height:80px;margin-bottom:.5rem}.description{margin-block:1rem 1.5rem}.availability{margin-bottom:1rem}}
-@media(prefers-reduced-motion:reduce){.play-button{transition:none}h1 span{transform:none}}
+body{margin:0;min-width:280px;background:#eaf17f;color:#173c32;font-family:Outfit,sans-serif}
+a{color:inherit;text-underline-offset:.2em}
+a:focus-visible{outline:3px solid currentColor;outline-offset:6px}
+p,h1{margin:0}
+::selection{background:#f4ad8b;color:#173c32}
+.wrap{max-width:1440px;min-height:100svh;margin:auto;padding:0 5vw;display:flex;flex-direction:column}
+.top{display:flex;align-items:center;padding:1.5rem 0}
+.brand{display:inline-flex;align-items:center;gap:.55rem;font-size:2.3rem;line-height:1;font-weight:900;letter-spacing:-.04em}
+.brand img{display:block;flex:none}
+.glyph{font-size:1.4em;line-height:1;margin-left:-.5rem}
+.a1{flex:1;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:3rem;align-items:center;padding:2.5rem 0}
+.h1{font-size:clamp(3rem,6vw,5.25rem);max-width:13ch;margin-bottom:1.5rem;font-weight:900;letter-spacing:-.04em;line-height:.99;text-wrap:balance}
+.shh{display:inline-block;font-size:.8em;vertical-align:.04em;letter-spacing:normal}
+.copy{font-size:1.25rem;line-height:1.5;max-width:35ch}
+.copy p+p{margin-top:.8rem}
+.action{display:flex;gap:.75rem;flex-wrap:wrap;max-width:360px;margin-top:1.7rem}
+.cta{flex:1 1 150px;min-width:0;display:inline-flex;align-items:center;justify-content:center;gap:.8rem;min-height:54px;padding:.9rem 1.25rem;border:1.5px solid #173c32;border-radius:10px;background:#173c32;color:#fffdf3;text-decoration:none;font-size:1.1rem;font-weight:700;line-height:1.2}
+.cta:hover{background:#2e5545}
+.cta svg{width:21px;height:21px;flex:none}
+.cta img{display:block;flex:none}
+.cta-secondary{background:transparent;color:#173c32}
+.cta-secondary:hover{background:#fffdf3}
+.fine{font-size:.9rem;line-height:1.5;margin-top:1rem}
+.mascot{margin:0;position:relative}
+.marmot{display:block;width:100%;height:auto}
+.mascot::after{content:"sssh.";position:absolute;top:0;right:8%;font-family:Caveat,sans-serif;font-size:4rem;transform:rotate(9deg)}
+.foot{display:flex;justify-content:space-between;gap:1rem;padding:1.8rem 0;font-size:.85rem;line-height:1.5}
+.foot a{text-decoration-thickness:1px}
+.skip{position:fixed;z-index:5;left:1rem;top:-6rem;padding:.8rem 1rem;background:#173c32;color:#fffdf3}
+.skip:focus{top:1rem}
+
+@media(max-width:900px){
+  .a1{gap:1rem}
+  .mascot::after{font-size:3rem}
+}
+@media(max-width:700px){
+  .wrap{padding:0 6vw}
+  .top{padding:1.5rem 0}
+  .brand{font-size:1.8rem}
+  .brand img{width:40px;height:35px}
+  .a1{grid-template-columns:1fr;padding:1.5rem 0 2rem;gap:2rem}
+  .h1{font-size:clamp(2.8rem,11.4vw,4.5rem)}
+  .copy{font-size:1.06rem;max-width:34ch}
+  .copy p+p{margin-top:.75rem}
+  .fine{font-size:.8rem}
+  .mascot{max-width:310px;width:100%;justify-self:end}
+  .mascot::after{font-size:3rem;top:-.3rem}
+  .foot{display:grid;gap:.35rem;padding:1.5rem 0;font-size:.8rem}
+}

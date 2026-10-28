@@ -16,7 +16,7 @@ Gioco cooperativo per aiutare la classe a trovare un rumore adatto al lavoro. La
 
 ## Brand Commitments
 
-Giocosa, alpina, leggibile. Nome scelto dal docente: Ronf. Indirizzo ronf.akkaz.dev. Frase: Fate squadra. Non svegliatela. Conservare l’identità del tabellone originale, le mascotte e la scena.
+Nome scelto dal docente: Ronf. Indirizzo ronf.akkaz.dev. Landing A1 approvata nella pagina di confronto: lime, verde scuro, lettere grandi e payoff aggiornato dall’autore: «Bro 🤫 La marmotta è nel chill.». Tono breve, ironico e da aula, senza formule promozionali. Usare la stessa identica marmotta del gioco; il piccolo marchio riprende il suo volto addormentato. Il tabellone conserva la sua identità, le mascotte e la scena.
 
 ## Capabilities and Constraints
 
@@ -31,7 +31,7 @@ Giocosa, alpina, leggibile. Nome scelto dal docente: Ronf. Indirizzo ronf.akkaz.
 
 ## Operating Context
 
-La landing deve essere molto minimale: nome, piccola mascotte, una breve descrizione, indicazione open source con link GitHub e un unico grande pulsante «Accendi Ronf» verso `gioca.html`. Gratuità e assenza di account in una sola riga. Il docente usa un computer con microfono collegato alla LIM; sul telefono può esplorare e configurare il gioco.
+La landing approvata riprende `.impeccable/mocks/decision/round2-a1.html`, con gli aggiornamenti diretti dell’autore: payoff e spiegazione breve, marmotta originale grande e contenuto centrato verticalmente. «Apri Ronf» è il pulsante principale verso `gioca.html`; «GitHub» è il pulsante secondario verso il codice. Gratuità e firma discreta «akkaz» restano leggibili. Il microfono si accende solo entrando nel gioco e scegliendo di usarlo. Il docente usa un computer con microfono collegato alla LIM; sul telefono può esplorare e configurare il gioco.
 
 ## Positioning
 

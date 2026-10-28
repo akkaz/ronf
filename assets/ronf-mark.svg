@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="52 38 136 115">
+  <!-- Volto della mascotte originale: stesse forme e stessi colori di marmotta.svg. -->
+  <circle fill="#7b5233" cx="73" cy="58" r="16"/>
+  <circle fill="#c99569" cx="73" cy="59" r="8"/>
+  <circle fill="#7b5233" cx="167" cy="58" r="16"/>
+  <circle fill="#c99569" cx="167" cy="59" r="8"/>
+  <ellipse fill="#a77449" cx="120" cy="98" rx="63" ry="54"/>
+  <path fill="#7b5233" opacity=".45" d="M68 80c18-40 86-40 104 0-30-14-74-14-104 0z"/>
+  <ellipse fill="#f0dfc2" cx="120" cy="122" rx="33" ry="25"/>
+  <g fill="#e98a7a" opacity=".5"><circle cx="80" cy="120" r="10"/><circle cx="160" cy="120" r="10"/></g>
+  <path fill="none" stroke="#3a2419" stroke-width="3" stroke-linecap="round" d="M120 112v6M106 117c5 6 10 6 14 1 4 5 9 5 14-1"/>
+  <g fill="#fffdf6" stroke="#3a2419" stroke-width="1.5"><rect x="113" y="118" width="7" height="11" rx="2"/><rect x="120" y="118" width="7" height="11" rx="2"/></g>
+  <ellipse fill="#3a2419" cx="120" cy="108" rx="10" ry="7"/>
+  <path fill="none" stroke="#3a2419" stroke-width="1.6" opacity=".45" d="M90 124l-28-4M90 130l-26 5M150 124l28-4M150 130l26 5"/>
+  <path fill="none" stroke="#3a2419" stroke-width="4.5" stroke-linecap="round" d="M85 94c6 7 15 7 21 0M134 94c6 7 15 7 21 0"/>
+</svg>

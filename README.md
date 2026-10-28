@@ -61,4 +61,4 @@ Nato dallâ€™esperienza in aula di **Gio Marco Baglioni**. La versione pubblica Ã
 
 ## Licenza
 
-Codice e illustrazioni del progetto: **[MIT](LICENSE)**. Atkinson Hyperlegible e Bungee mantengono le rispettive **SIL Open Font License 1.1**, incluse in `assets/fonts/`. Il marchio GitHub proviene da Octicons (licenza MIT in `assets/LICENSE-octicons.txt`). Le illustrazioni delle mascotte aggiuntive sono state generate con AI, come documentato in `ASSETS.md`.
+Codice e illustrazioni del progetto: **[MIT](LICENSE)**. Atkinson Hyperlegible, Bungee, Outfit e Caveat mantengono le rispettive **SIL Open Font License 1.1**, incluse in `assets/fonts/`. Il marchio GitHub proviene da Octicons (licenza MIT in `assets/LICENSE-octicons.txt`). Le illustrazioni delle mascotte aggiuntive sono state generate con AI, come documentato in `ASSETS.md`.

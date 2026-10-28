@@ -33,3 +33,11 @@ Use case: stylized-concept. Asset type: production game character sprite atlas f
 ## GitHub
 
 Il marchio GitHub è l’icona `mark-github-16` del progetto Primer Octicons: https://github.com/primer/octicons. Licenza MIT inclusa in `assets/LICENSE-octicons.txt`.
+
+## Font della landing
+
+Outfit e Caveat provengono dal repository ufficiale Google Fonts (`ofl/outfit` e `ofl/caveat`). I file variabili sono serviti localmente da `assets/fonts/`; le rispettive licenze OFL sono in `OFL-Outfit.txt` e `OFL-Caveat.txt`. La landing riusa `assets/marmotta.svg`, senza generare una mascotte diversa.
+
+## Marchio Ronf
+
+`assets/ronf-mark.svg` riusa il solo volto addormentato di `assets/marmotta.svg`, con le stesse forme e gli stessi colori. Usato accanto al nome nella landing e come favicon. Nessuna nuova illustrazione generata.
