@@ -1,22 +1,19 @@
-@font-face{font-family:'Atkinson Hyperlegible';src:url('./assets/fonts/atkinson-regular.ttf') format('truetype');font-weight:400;font-display:swap}
-@font-face{font-family:'Atkinson Hyperlegible';src:url('./assets/fonts/atkinson-bold.ttf') format('truetype');font-weight:700;font-display:swap}
-@font-face{font-family:Bungee;src:url('./assets/fonts/bungee.ttf') format('truetype');font-weight:400;font-display:swap}
 :root{scrollbar-color:#7a9485 #e7efe3;accent-color:#365a46}
 ::selection{background:#d6b5ed;color:#233f38}
 input,textarea{caret-color:#365a46}
 a{color:#315942;text-underline-offset:.2em}
 a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #8154aa;outline-offset:3px}
 .top{gap:.8rem;align-items:center}
-.brand-home,.start-brand{font-family:Bungee,'Atkinson Hyperlegible',sans-serif;letter-spacing:-.025em;text-decoration:none;color:#233f38;position:relative}
+.brand-home,.start-brand{letter-spacing:-.025em;text-decoration:none;color:#233f38;position:relative}
 .brand-home{font-size:1.8rem;border:0;background:transparent;padding:.1rem .4rem}
-.brand-home span,.start-brand span{font-family:'Atkinson Hyperlegible',sans-serif;position:absolute;font-weight:700;font-size:.45em;letter-spacing:.06em;transform:rotate(-13deg);top:-.1rem;right:-.2rem;color:#765196}
-.app-name{font-family:'Atkinson Hyperlegible',sans-serif;font-size:.95rem;font-weight:400;max-width:15rem;line-height:1.2}
+.brand-home span,.start-brand span{position:absolute;font-weight:700;font-size:.45em;letter-spacing:.06em;transform:rotate(-13deg);top:-.1rem;right:-.2rem;color:#765196}
+.app-name{font-size:.95rem;font-weight:400;max-width:15rem;line-height:1.2}
 .class-picker{max-width:12rem;font-size:1rem;min-height:2.5rem;background:#f7faf6;border:1px solid #8da594;border-radius:.5rem;color:#233f38;padding:.35rem .6rem}
 .start{background:rgba(20,39,36,.83);padding:1.2rem;overflow:auto;align-items:center}
 .start-card{position:relative;max-width:43rem;width:100%;padding:2.2rem 2.4rem 1.8rem;background:#f7faf2;border-radius:1rem;border:0;box-shadow:0 12px 46px rgba(10,27,24,.26)}
 .start-brand{display:inline-block;font-size:2rem;line-height:1.1;margin-bottom:1.6rem}
 .welcome-mascot{position:absolute;right:2.1rem;top:1rem;width:8.5rem;height:8.5rem;object-fit:contain}
-.start h2{font-family:Bungee,'Atkinson Hyperlegible',sans-serif;font-size:clamp(1.7rem,3vw,2.5rem);line-height:1.16;max-width:16ch;margin:0 0 1rem;letter-spacing:-.025em;text-wrap:balance}
+.start h2{font-size:clamp(1.7rem,3vw,2.5rem);line-height:1.16;max-width:16ch;margin:0 0 1rem;letter-spacing:-.025em;text-wrap:balance}
 .start h2+p{font-size:1.08rem;line-height:1.5;max-width:48ch;margin:0 0 1.3rem;color:#3f554b}
 .start .game-guide{margin:1rem 0 1.2rem;padding:0;gap:1.2rem;background:transparent;border:0}
 .game-guide b{font-size:.95rem;color:#233f38}.game-guide span{font-size:.88rem;line-height:1.35;color:#4a5d52}
