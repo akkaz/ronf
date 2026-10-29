@@ -49,6 +49,8 @@ Pubblica il contenuto di `dist/` su un hosting statico HTTPS. Tutti i percorsi s
 
 ## Contribuire
 
+Prima volta con GitHub? Segui [La prima PR su Ronf](PRIMI-PASSI.md): fork, clone, avvio sul PC e una piccola modifica allo sfondo della home.
+
 Per bug e proposte apri una issue indicando browser, dispositivo, passaggi e comportamento atteso. Non allegare audio dell’aula, nomi o dati degli studenti. Per una modifica, crea un branch e una pull request e verifica `npm test` e il gioco su computer e telefono.
 
 - `app.js`: microfono, regole della lezione, UI e salvataggi locali.
